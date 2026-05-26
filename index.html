@@ -336,7 +336,7 @@
         </div>
     </section>
 
-    <!-- EXPLORE SERVICES SECTION (UPDATED COPY) -->
+    <!-- EXPLORE SERVICES SECTION -->
     <section id="services" class="py-20 lg:py-28 bg-lightBg no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header Text -->
@@ -443,11 +443,11 @@
                     </div>
                 </div>
 
-                <!-- Warehouse Solutions (ATTACHED REAL PHOTO) -->
+                <!-- Warehouse Solutions -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
                         <!-- High resolution, active warehouse fulfillment imagery -->
-                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Warehouse Solutions" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Warehouse+Solutions'">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Warehouse Solutions" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/800x600?text=Warehouse+Solutions'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -466,7 +466,7 @@
         </div>
     </section>
 
-    <!-- TWO-COLUMN ABOUT & TRUSTED LOGISTICS (UPDATED COPY) -->
+    <!-- TWO-COLUMN ABOUT & TRUSTED LOGISTICS -->
     <section id="about" class="py-20 lg:py-28 bg-white no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -516,7 +516,7 @@
                 </div>
             </div>
 
-            <!-- TRUST PANEL (UPDATED COPY) -->
+            <!-- TRUST PANEL -->
             <div class="mt-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Left Side: Text and Trust details -->
                 <div class="order-2 lg:order-1">
@@ -554,7 +554,7 @@
         </div>
     </section>
 
-    <!-- STATS / FACTS SECTION (UPDATED COPY) -->
+    <!-- STATS / FACTS SECTION -->
     <section class="py-20 lg:py-24 bg-lightBg border-t border-slate-100 no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -619,117 +619,62 @@
         </div>
     </section>
 
-    <!-- REQUEST FREE QUOTE SECTION & LIVE ESTIMATION CALCULATOR -->
+    <!-- REQUEST FREE QUOTE SECTION -->
     <section id="quote" class="py-20 lg:py-28 bg-white no-print">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-                
-                <!-- Left panel: Form Quote -->
-                <div class="bg-slate-50 p-8 sm:p-10 rounded-xl shadow-lg border border-slate-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Centered Quote Form Panel -->
+            <div class="bg-slate-50 p-8 sm:p-10 rounded-xl shadow-lg border border-slate-100">
+                <div class="text-center mb-8">
                     <span class="text-primary font-heading font-bold text-sm uppercase tracking-widest block mb-2">Get A Quote</span>
-                    <h2 class="text-secondary font-heading font-extrabold text-2xl sm:text-3xl mb-6">Request A Free Quote!</h2>
-                    
-                    <form id="quoteForm" onsubmit="handleQuoteSubmit(event)" class="space-y-6">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label for="quoteName" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Your Name</label>
-                                <input type="text" id="quoteName" required placeholder="John Doe" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
-                            </div>
-                            <div>
-                                <label for="quoteEmail" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Your Email</label>
-                                <input type="email" id="quoteEmail" required placeholder="john@example.com" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label for="quotePhone" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Your Phone</label>
-                                <input type="tel" id="quotePhone" placeholder="+123 456 7890" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
-                            </div>
-                            <div>
-                                <label for="quoteService" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Select A Service</label>
-                                <select id="quoteService" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
-                                    <option value="Air Freight">Air Freight</option>
-                                    <option value="Ocean Freight">Ocean Freight</option>
-                                    <option value="Road Freight">Road Freight</option>
-                                    <option value="Train Freight">Train Freight</option>
-                                    <option value="Warehouse Solutions">Warehouse Solutions</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label for="quoteMessage" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Special Note</label>
-                            <textarea id="quoteMessage" rows="3" placeholder="Describe your logistics needs..." class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"></textarea>
-                        </div>
-
-                        <button type="submit" class="w-full py-4 bg-primary text-white font-heading font-bold rounded uppercase tracking-wider hover:bg-rose-700 shadow-md transition-all">
-                            Submit Request
-                        </button>
-                    </form>
+                    <h2 class="text-secondary font-heading font-extrabold text-2xl sm:text-3xl">Request A Free Quote!</h2>
+                    <div class="w-12 h-1 bg-primary mx-auto mt-3 rounded"></div>
                 </div>
-
-                <!-- Brought to life: Right panel - LIVE COST ESTIMATOR -->
-                <div class="bg-slate-900 text-white p-8 sm:p-10 rounded-xl shadow-lg border border-slate-800">
-                    <span class="text-primary font-heading font-bold text-sm uppercase tracking-widest block mb-2">Instant Pricing Engine</span>
-                    <h3 class="text-2xl font-heading font-extrabold mb-4">Live Rate Estimator</h3>
-                    <p class="text-slate-400 text-sm mb-6 leading-relaxed">Calculate ballpark cargo routing expenses dynamically before submission.</p>
-
-                    <div class="space-y-5">
-                        <!-- Weight Slider -->
+                
+                <form id="quoteForm" onsubmit="handleQuoteSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <div class="flex justify-between text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-                                <span>Total Weight</span>
-                                <span class="text-primary" id="weightVal">150 kg</span>
-                            </div>
-                            <input type="range" id="calcWeight" min="10" max="5000" value="150" oninput="calculateEstimate()" class="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-primary">
+                            <label for="quoteName" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Your Name</label>
+                            <input type="text" id="quoteName" required placeholder="John Doe" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
                         </div>
-
-                        <!-- Distance Slider -->
                         <div>
-                            <div class="flex justify-between text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-                                <span>Distance</span>
-                                <span class="text-primary" id="distanceVal">300 km</span>
-                            </div>
-                            <input type="range" id="calcDistance" min="50" max="15000" value="300" oninput="calculateEstimate()" class="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-primary">
-                        </div>
-
-                        <!-- Mode Options -->
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Freight Class</label>
-                            <div class="grid grid-cols-3 gap-3">
-                                <label class="border border-slate-800 bg-slate-950 p-3 rounded text-center cursor-pointer transition-all hover:border-primary block">
-                                    <input type="radio" name="calcMode" value="air" checked onchange="calculateEstimate()" class="sr-only">
-                                    <i class="fa-solid fa-plane text-xl mb-1 text-primary"></i>
-                                    <span class="block text-xs font-bold uppercase tracking-wider mt-1">Air</span>
-                                </label>
-                                <label class="border border-slate-800 bg-slate-950 p-3 rounded text-center cursor-pointer transition-all hover:border-primary block">
-                                    <input type="radio" name="calcMode" value="ocean" onchange="calculateEstimate()" class="sr-only">
-                                    <i class="fa-solid fa-ship text-xl mb-1 text-slate-400"></i>
-                                    <span class="block text-xs font-bold uppercase tracking-wider mt-1">Ocean</span>
-                                </label>
-                                <label class="border border-slate-800 bg-slate-950 p-3 rounded text-center cursor-pointer transition-all hover:border-primary block">
-                                    <input type="radio" name="calcMode" value="road" onchange="calculateEstimate()" class="sr-only">
-                                    <i class="fa-solid fa-truck text-xl mb-1 text-slate-400"></i>
-                                    <span class="block text-xs font-bold uppercase tracking-wider mt-1">Road</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Live Estimate Output box -->
-                        <div class="bg-slate-950 border border-slate-800 rounded-lg p-5 mt-6 text-center">
-                            <span class="text-slate-500 text-xs font-bold uppercase tracking-wider">Estimated Logistics Cost</span>
-                            <div class="text-4xl font-heading font-extrabold text-white mt-1" id="calculatedPrice">$165.00</div>
-                            <p class="text-[10px] text-slate-500 mt-2">Value includes route custom fees and fuel adjustment surcharges.</p>
+                            <label for="quoteEmail" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Your Email</label>
+                            <input type="email" id="quoteEmail" required placeholder="john@example.com" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
                         </div>
                     </div>
-                </div>
 
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="quotePhone" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Your Phone</label>
+                            <input type="tel" id="quotePhone" placeholder="+123 456 7890" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                        </div>
+                        <div>
+                            <label for="quoteService" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Select A Service</label>
+                            <select id="quoteService" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                                <option value="Air Freight">Air Freight</option>
+                                <option value="Ocean Freight">Ocean Freight</option>
+                                <option value="Road Freight">Road Freight</option>
+                                <option value="Train Freight">Train Freight</option>
+                                <option value="Warehouse Solutions">Warehouse Solutions</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="quoteMessage" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Special Note</label>
+                        <textarea id="quoteMessage" rows="4" placeholder="Describe your logistics needs..." class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-primary text-white font-heading font-bold rounded uppercase tracking-wider hover:bg-rose-700 shadow-md transition-all">
+                        Submit Request
+                    </button>
+                </form>
             </div>
+
         </div>
     </section>
 
-    <!-- TESTIMONIAL CAROUSEL SECTION (UPDATED TO BE REAL) -->
+    <!-- TESTIMONIAL CAROUSEL SECTION -->
     <section id="testimonials" class="py-20 lg:py-28 bg-lightBg border-t border-slate-100 overflow-hidden no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header Text -->
@@ -817,63 +762,39 @@
         </div>
     </section>
 
-    <!-- CONTACT MAP & GET IN TOUCH -->
+    <!-- CONTACT & GET IN TOUCH -->
     <section id="contact" class="py-20 lg:py-28 bg-white no-print">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-                <!-- Contact info panel -->
-                <div>
-                    <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2">Get In Touch</p>
-                    <h2 class="text-secondary font-heading font-extrabold text-3xl sm:text-4xl mb-6">Contact Us For Any Inquiry</h2>
-                    <p class="text-slate-600 mb-8 leading-relaxed">
-                        Our experts are available 24/7 to solve your logistics, transport, tracking and freight management inquiries. Reach out to us via any channel or submit the request form.
-                    </p>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2">Get In Touch</p>
+            <h2 class="text-secondary font-heading font-extrabold text-3xl sm:text-4xl mb-6">Contact Us For Any Inquiry</h2>
+            <p class="text-slate-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+                Our experts are available 24/7 to solve your logistics, transport, tracking and freight management inquiries. Reach out to us via any channel or submit the request form.
+            </p>
 
-                    <div class="space-y-6">
-                        <div class="flex items-start space-x-4">
-                            <div class="bg-primary/10 text-primary p-3 rounded-lg"><i class="fa-solid fa-map-marker-alt text-lg"></i></div>
-                            <div>
-                                <h4 class="font-heading font-bold text-secondary">Office Address</h4>
-                                <p class="text-slate-500 text-sm mt-1">123 Street, New York, USA</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4">
-                            <div class="bg-primary/10 text-primary p-3 rounded-lg"><i class="fa-solid fa-phone-alt text-lg"></i></div>
-                            <div>
-                                <h4 class="font-heading font-bold text-secondary">Emergency Phone</h4>
-                                <p class="text-slate-500 text-sm mt-1">+012 345 6789</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4">
-                            <div class="bg-primary/10 text-primary p-3 rounded-lg"><i class="fa-solid fa-envelope text-lg"></i></div>
-                            <div>
-                                <h4 class="font-heading font-bold text-secondary">Email Support</h4>
-                                <p class="text-slate-500 text-sm mt-1">info@example.com</p>
-                            </div>
-                        </div>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Address Card -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center text-center">
+                    <div class="bg-primary/10 text-primary p-4 rounded-full mb-4"><i class="fa-solid fa-map-marker-alt text-xl"></i></div>
+                    <h4 class="font-heading font-bold text-secondary text-base">Office Address</h4>
+                    <p class="text-slate-500 text-sm mt-2 font-medium">123 Street, New York, USA</p>
                 </div>
-
-                <!-- Google map simulation box with premium dark theme styling -->
-                <div class="h-96 w-full rounded-xl overflow-hidden shadow-lg border border-slate-100 relative group">
-                    <!-- Leaflet OpenStreetMap wrapper or stylized mock representation of maps -->
-                    <div class="absolute inset-0 bg-slate-900 flex flex-col justify-center items-center p-6 text-center text-slate-300">
-                        <div class="w-16 h-16 rounded-full bg-primary/20 text-primary flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <i class="fa-solid fa-map-location-dot"></i>
-                        </div>
-                        <h4 class="font-heading font-bold text-white text-lg mb-1">Interactive Map Integration</h4>
-                        <p class="text-xs text-slate-400 max-w-sm mb-6 leading-relaxed">Centred at HQ: Manhattan, NY, USA. Includes satellite tracking & custom shipping route planner.</p>
-                        <!-- Stylized Mock Button -->
-                        <button onclick="showMockMapAlert()" class="px-6 py-2.5 bg-primary hover:bg-rose-700 text-white font-heading font-bold text-xs uppercase tracking-wider rounded transition-colors shadow-md">
-                            Open Route Map
-                        </button>
-                    </div>
+                <!-- Phone Card -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center text-center">
+                    <div class="bg-primary/10 text-primary p-4 rounded-full mb-4"><i class="fa-solid fa-phone-alt text-xl"></i></div>
+                    <h4 class="font-heading font-bold text-secondary text-base">Emergency Phone</h4>
+                    <p class="text-slate-500 text-sm mt-2 font-medium">+012 345 6789</p>
+                </div>
+                <!-- Email Card -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center text-center">
+                    <div class="bg-primary/10 text-primary p-4 rounded-full mb-4"><i class="fa-solid fa-envelope text-xl"></i></div>
+                    <h4 class="font-heading font-bold text-secondary text-base">Email Support</h4>
+                    <p class="text-slate-500 text-sm mt-2 font-medium">info@example.com</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER SECTION (Removed Pricing & Team Links) -->
+    <!-- FOOTER SECTION -->
     <footer class="bg-slate-900 text-slate-300 pt-20 pb-10 border-t border-slate-800 no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
@@ -904,7 +825,7 @@
                     </ul>
                 </div>
 
-                <!-- Quick Links Column (Removed Pricing & Team) -->
+                <!-- Quick Links Column -->
                 <div>
                     <h4 class="font-heading font-bold text-lg text-white mb-6 border-l-4 border-primary pl-3">Quick Links</h4>
                     <ul class="space-y-3 text-sm font-semibold uppercase tracking-wide">
@@ -1138,6 +1059,7 @@
         const statusModal = document.getElementById('statusModal');
         const modalCard = document.getElementById('modalCard');
 
+        // Main status alerts
         function openStatusModal(title, msg, isSuccess = true) {
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalMessage').innerText = msg;
@@ -1189,23 +1111,6 @@
                 `You have successfully subscribed to the Shipment newsletter. Global cargo insights and transport updates will be delivered periodically to ${email}.`
             );
             document.getElementById('newsEmail').value = "";
-        }
-
-        // Pricing handler (Retained generic logic)
-        function openPricingModal(planName, price) {
-            openStatusModal(
-                "Plan Selected!",
-                `You have chosen the ${planName} for ${price}. Our sales representative will contact you immediately to finalize authorization credentials and service onboarding.`
-            );
-        }
-
-        // Mock Maps alert handler
-        function showMockMapAlert() {
-            openStatusModal(
-                "Logistics Tracker Map",
-                "The fleet route optimizer map module is loading on your secured proxy profile. Interactive GPS coordinates will synchronize directly with active carrier channels.",
-                true
-            );
         }
 
         /* LIVE REALISTIC SHIPMENT TRACKER TELEMETRY DATABASE */
@@ -1463,54 +1368,6 @@
                 `Opening prioritized chat bridge regarding cargo ${window.currentTrackedCargoID || 'SH-99210'}. A freight consultant is reviewing your custom logistics file.`
             );
         }
-
-
-        /* BROUGHT TO LIFE: INSTANT PRICING ENGINE CALCULATOR */
-        function calculateEstimate() {
-            const weight = parseFloat(document.getElementById('calcWeight').value);
-            const distance = parseFloat(document.getElementById('calcDistance').value);
-            
-            // Get selected radio transport mode
-            const modeRadios = document.getElementsByName('calcMode');
-            let mode = 'air';
-            for (let radio of modeRadios) {
-                if (radio.checked) {
-                    mode = radio.value;
-                    // Stylize chosen parent label active states
-                    radio.parentElement.classList.add('border-primary', 'bg-slate-950');
-                    radio.parentElement.querySelector('i').classList.add('text-primary');
-                    radio.parentElement.querySelector('i').classList.remove('text-slate-400');
-                } else {
-                    radio.parentElement.classList.remove('border-primary');
-                    radio.parentElement.querySelector('i').classList.remove('text-primary');
-                    radio.parentElement.querySelector('i').classList.add('text-slate-400');
-                }
-            }
-
-            // Update numeric slider display readouts
-            document.getElementById('weightVal').innerText = `${weight.toLocaleString()} kg`;
-            document.getElementById('distanceVal').innerText = `${distance.toLocaleString()} km`;
-
-            // Estimator arithmetic factors
-            let baseRate = 25.00;
-            let multiplier = 0.15; // default road
-
-            if (mode === 'air') {
-                baseRate = 75.00;
-                multiplier = 0.85;
-            } else if (mode === 'ocean') {
-                baseRate = 45.00;
-                multiplier = 0.35;
-            }
-
-            const calculation = baseRate + (weight * 0.25) + (distance * multiplier);
-            document.getElementById('calculatedPrice').innerText = `$${calculation.toFixed(2)}`;
-        }
-
-        // Initialize rates on window load
-        window.addEventListener('load', () => {
-            calculateEstimate();
-        });
     </script>
 </body>
 </html>
