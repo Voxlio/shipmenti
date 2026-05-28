@@ -172,7 +172,7 @@
                 <div class="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full filter blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
 
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10 border-b border-slate-800 pb-8 mb-8">
-                    <!-- Text Info (Demo identifiers safely removed from here) -->
+                    <!-- Text Info -->
                     <div class="max-w-md">
                         <span class="bg-primary/15 text-primary border border-primary/30 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full inline-flex items-center gap-1.5">
                             <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span> Live Global Telemetry
@@ -277,11 +277,11 @@
                             <div class="space-y-4 text-sm">
                                 <div class="flex justify-between py-1 border-b border-slate-900">
                                     <span class="text-slate-500">Shipper / Origin</span>
-                                    <span id="trackShipper" class="text-slate-200 font-semibold">-</span>
+                                    <span id="trackShipper" class="text-slate-200 font-semibold text-right max-w-[180px] truncate block">-</span>
                                 </div>
                                 <div class="flex justify-between py-1 border-b border-slate-900">
                                     <span class="text-slate-500">Consignee / Destination</span>
-                                    <span id="trackReceiver" class="text-slate-200 font-semibold">-</span>
+                                    <span id="trackReceiver" class="text-slate-200 font-semibold text-right max-w-[180px] truncate block">-</span>
                                 </div>
                                 <div class="flex justify-between py-1 border-b border-slate-900">
                                     <span class="text-slate-500">Gross Payload Weight</span>
@@ -1001,16 +1001,6 @@
             updateSlider();
         }
 
-        function prevSlide() {
-            currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
-            updateSlider();
-        }
-
-        function goToSlide(index) {
-            currentSlideIndex = index;
-            updateSlider();
-        }
-
         // Auto slide every 8 seconds
         setInterval(nextSlide, 8000);
 
@@ -1108,83 +1098,6 @@
             document.getElementById('newsEmail').value = "";
         }
 
-        /* LIVE REALISTIC SHIPMENT TRACKER TELEMETRY DATABASE */
-        const trackingDB = {
-            "SH-99210": {
-                waybill: "WB-901042-99210",
-                eta: "In 2 Days (May 28, 2026)",
-                location: "New York JFK Cargo Center Hub",
-                status: "In Transit",
-                badgeClass: "bg-amber-500/10 text-amber-500 border border-amber-500/30",
-                step: 3,
-                shipper: "Lux Logistics SA, Paris (CDG)",
-                receiver: "TechCorp Industries, New York (JFK)",
-                service: "Express Air Freight Priority",
-                weight: "245.5 kg",
-                dimensions: "120 × 80 × 95 cm",
-                barcode: "|||| | | ||| || ||| | ||",
-                tempSensor: "18.2°C (Optimal Room Temp)",
-                times: ["May 23, 08:30 AM", "May 24, 11:15 AM", "May 25, 02:45 PM", "Pending Transit"],
-                timeline: [
-                    { time: "May 26, 2026 - 10:15 AM", event: "Arrived at USA Import Hub", loc: "New York JFK Cargo Terminal", icon: "fa-plane-arrival", desc: "Transatlantic flight route SH-401 completed. Routed to custom import docks." },
-                    { time: "May 25, 2026 - 03:30 AM", event: "In Transit - Flight Departed", loc: "Paris Charles de Gaulle (CDG)", icon: "fa-plane-departure", desc: "Consolidated freight load departed on flight SH-401 eastbound." },
-                    { time: "May 24, 2026 - 01:15 PM", event: "Sorted & Export Dock cleared", loc: "Paris CDG Airport Depot", icon: "fa-clipboard-check", desc: "Customs declaration filed, export taxes cleared, secured container load approved." },
-                    { time: "May 23, 2026 - 08:30 AM", event: "Manifest Initiated & Picked Up", loc: "Shipper Paris Facility Warehouse", icon: "fa-truck-ramp-box", desc: "Package picked up by express courier. Weight verified, container sealed." }
-                ]
-            },
-            "SH-44023": {
-                waybill: "WB-220194-44023",
-                eta: "Delivered (May 25, 2026)",
-                location: "New York HQ - Dock B (Signed by A. Carter)",
-                status: "Delivered",
-                badgeClass: "bg-emerald-500/10 text-emerald-500 border border-emerald-500/30",
-                step: 4,
-                shipper: "Global Auto Parts Corp, Los Angeles (LAX)",
-                receiver: "Manhattan Assembly Lines, New York",
-                service: "Overland Road Freight Cold-Chain",
-                weight: "1,240.0 kg",
-                dimensions: "240 × 120 × 180 cm",
-                barcode: "||| ||| | ||| || || |||",
-                tempSensor: "4.5°C (Refrigerated Controlled)",
-                times: ["May 21, 09:00 AM", "May 22, 02:00 PM", "May 24, 10:45 PM", "May 25, 01:20 PM"],
-                timeline: [
-                    { time: "May 25, 2026 - 01:20 PM", event: "Cargo Delivered & Completed", loc: "Manhattan Corporate Assembly Office", icon: "fa-circle-check", desc: "Cargo offloaded. Checked out cleanly. Received and signed by operations lead Andrew Carter." },
-                    { time: "May 25, 2026 - 07:45 AM", event: "Out for Final Mile Delivery", loc: "New York Terminal Gate 3", icon: "fa-truck-fast", desc: "Consolidated load transferred to local delivery courier for dock delivery." },
-                    { time: "May 24, 2026 - 10:45 PM", event: "Arrived at Regional Distribution Hub", loc: "New York Jersey Terminals", icon: "fa-warehouse", desc: "Cross-dock de-consolidation initiated. Long-haul trailer disconnected safely." },
-                    { time: "May 22, 2026 - 02:00 PM", event: "Interstate Transit Gate Clearance", loc: "Chicago Transit Plaza Checkpoint", icon: "fa-truck", desc: "Midwest route checkpoint verified. Carrier telemetry reports zero mechanical anomalies." },
-                    { time: "May 21, 2026 - 09:00 AM", event: "Cargo Picked Up & Sealing Completed", loc: "Los Angeles Depot Loading Ramp", icon: "fa-box-open", desc: "Refrigerated trailer loaded. Barcodes assigned and structural tracking enabled." }
-                ]
-            },
-            "SH-55731": {
-                waybill: "WB-883011-55731",
-                eta: "Customs Hold (Delayed)",
-                location: "Port of Seattle, Customs Clearance Terminal",
-                status: "Customs Exception",
-                badgeClass: "bg-rose-500/10 text-rose-500 border border-rose-500/30",
-                step: 2,
-                shipper: "SinoExport Manufactures, Shanghai Port",
-                receiver: "Pacific Distribution Group, Seattle Center",
-                service: "Ocean Carrier Vessel Consignee",
-                weight: "14,500 kg",
-                dimensions: "20ft Premium High-Cube Container",
-                barcode: "||| | ||| || ||| || ||| ||",
-                tempSensor: "15.4°C (Optimal Container Temp)",
-                times: ["May 08, 10:00 AM", "May 25, 04:12 PM", "Pending Release", "Pending Release"],
-                timeline: [
-                    { time: "May 26, 2026 - 09:00 AM", event: "Customs Inspection Hold", loc: "Port of Seattle Customs Compound", icon: "fa-circle-exclamation", desc: "Random customs check initiated. Import duty declaration under inspection. Agent broker has been notified." },
-                    { time: "May 25, 2026 - 04:12 PM", event: "Cargo Vessel Docked & Discharged", loc: "Port of Seattle Dock Terminal 18", icon: "fa-ship", desc: "Container vessel MSC Oceanica arrived safely. Container discharged and routed to container yard." },
-                    { time: "May 10, 2026 - 11:30 PM", event: "Vessel Departed Origin Port", loc: "Shanghai Deepwater Port", icon: "fa-anchor", desc: "Ocean freight corridor transit route initiated across trans-pacific line." },
-                    { time: "May 08, 2026 - 10:00 AM", event: "Manifest Registered & Containerized", loc: "Shanghai Industrial Zone Depot", icon: "fa-file-signature", desc: "Waybill registered. Export packing checks completed and standard security seals applied." }
-                ]
-            }
-        };
-
-        function fillDemoID(id) {
-            document.getElementById('trackingIDInput').value = id;
-            // Trigger locate form
-            handleLiveTrack(new Event('submit'));
-        }
-
         // Live API call tracking database resolver
         async function handleLiveTrack(e) {
             if (e) e.preventDefault();
@@ -1202,49 +1115,18 @@
                     console.warn(`Live server returned non-OK status code: ${response.status}`);
                 }
             } catch (err) {
-                console.warn('API database connection failed, resolving to local generator fallback:', err);
+                console.warn('API database connection failed:', err);
             }
 
-            // Fallback generation logic if the API returns 404, fails, or server is offline
+            // If the shipment is not found on your Node.js backend server, cleanly raise an unregistered alert
             if (!result) {
-                const randomSteps = Math.floor(Math.random() * 3) + 1; // 1, 2, or 3
-                const statuses = ["Manifest Prepared", "Consolidated", "In Route Transit"];
-                const badgeClasses = [
-                    "bg-sky-500/10 text-sky-500 border border-sky-500/30",
-                    "bg-indigo-500/10 text-indigo-500 border border-indigo-500/30",
-                    "bg-amber-500/10 text-amber-500 border border-amber-500/30"
-                ];
-                
-                result = {
-                    waybill: `WB-${Math.floor(Math.random()*800000)+100000}-${query}`,
-                    eta: `In ${Math.floor(Math.random()*7)+3} Business Days`,
-                    location: "Global Distribution Depot Terminal",
-                    status: statuses[randomSteps - 1],
-                    badgeClass: badgeClasses[randomSteps - 1],
-                    step: randomSteps,
-                    shipper: "Global Sourcing Supplier Node",
-                    receiver: "Registered Corporate Recipient Location",
-                    service: "Standard Intermodal Freight Class",
-                    weight: `${(Math.random()*4000 + 50).toFixed(1)} kg`,
-                    dimensions: `${Math.floor(Math.random()*150)+50}×${Math.floor(Math.random()*100)+40}×${Math.floor(Math.random()*120)+50} cm`,
-                    barcode: "||| | ||| | || ||| || || |",
-                    tempSensor: `${(Math.random()*15 + 10).toFixed(1)}°C (Optimized Cargo Temp)`,
-                    times: [
-                        "May 24, 08:00 AM",
-                        randomSteps >= 2 ? "May 24, 05:30 PM" : "Pending Waybill Handover",
-                        randomSteps >= 3 ? "May 25, 09:15 AM" : "Pending Linehaul Sorting",
-                        "Pending Delivery"
-                    ],
-                    timeline: [
-                        { time: "May 25, 2026 - 11:45 AM", event: "Package Dispatched via Linehaul", loc: "National Route Hub Sorting", icon: "fa-truck-fast", desc: "Consolidated cargo container loaded onto regional transport grid routes." },
-                        { time: "May 24, 2026 - 05:30 PM", event: "Freight Manifest Received & Sorted", loc: "Local Cargo Terminal compound", icon: "fa-warehouse", desc: "Cargo pallet checked, weighed, security-scanned, and prepared for linehaul allocation." },
-                        { time: "May 24, 2026 - 08:00 AM", event: "Shipment Registered by Vendor", loc: "Shipper Central Warehouse", icon: "fa-truck-ramp-box", desc: "Logistics paperwork approved. Tracking ID registered in standard shipping manifests." }
-                    ]
-                };
-
-                // Truncate random timeline items depending on generated steps
-                if (randomSteps === 1) result.timeline = result.timeline.slice(2);
-                if (randomSteps === 2) result.timeline = result.timeline.slice(1);
+                outputPanel.classList.add('hidden');
+                openStatusModal(
+                    "Shipment ID Unregistered", 
+                    `The Waybill Code "${query}" could not be recognized on our active database records. Please verify your tracking ID with your dispatch hub manager.`, 
+                    false
+                );
+                return;
             }
 
             // Cache global current track object to use inside modal invoices
