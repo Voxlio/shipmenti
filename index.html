@@ -37,7 +37,7 @@
             background: linear-gradient(135deg, #FF3E41 0%, #E11D48 100%);
         }
         .hero-overlay {
-            background: rgba(15, 23, 42, 0.75);
+            background: rgba(15, 23, 42, 0.78);
         }
         /* Custom scrollbar */
         ::-webkit-scrollbar {
@@ -53,6 +53,18 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #94A3B8;
         }
+        
+        /* Smooth transitions for interactive elements */
+        .transition-all-300 {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Nav active class */
+        .nav-active {
+            color: #FF3E41 !important;
+            border-bottom: 2px solid #FF3E41;
+        }
+
         @media print {
             .no-print {
                 display: none !important;
@@ -69,10 +81,10 @@
             <span class="flex items-center"><i class="fa-solid fa-envelope text-primary mr-2"></i> info@example.com</span>
         </div>
         <div class="flex items-center space-x-4">
-            <a href="#" class="hover:text-primary transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="hover:text-primary transition-colors"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#" class="hover:text-primary transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="#" class="hover:text-primary transition-colors"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="hover:text-primary transition-colors duration-200" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="hover:text-primary transition-colors duration-200" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="hover:text-primary transition-colors duration-200" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="hover:text-primary transition-colors duration-200" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
         </div>
     </div>
 
@@ -84,15 +96,15 @@
                 <i class="fa-solid fa-box-open mr-2 text-xl lg:text-2xl"></i> Shipment
             </a>
 
-            <!-- Desktop Links (Removed Pricing & Team) -->
-            <div class="hidden lg:flex items-center space-x-8 font-heading font-semibold text-sm text-slate-800 tracking-wide uppercase">
-                <a href="#home" class="text-primary hover:text-primary transition-colors">Home</a>
-                <a href="#tracker" class="hover:text-primary transition-colors">Track</a>
-                <a href="#about" class="hover:text-primary transition-colors">About</a>
-                <a href="#services" class="hover:text-primary transition-colors">Services</a>
-                <a href="#quote" class="hover:text-primary transition-colors">Quote</a>
-                <a href="#testimonials" class="hover:text-primary transition-colors">Testimonial</a>
-                <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+            <!-- Desktop Links (With responsive active status highlighted on scroll) -->
+            <div id="desktopNavLinks" class="hidden lg:flex items-center space-x-8 font-heading font-semibold text-sm text-slate-800 tracking-wide uppercase h-full">
+                <a href="#home" class="nav-link py-5 text-primary hover:text-primary border-b-2 border-transparent transition-all duration-200">Home</a>
+                <a href="#tracker" class="nav-link py-5 hover:text-primary border-b-2 border-transparent transition-all duration-200">Track</a>
+                <a href="#about" class="nav-link py-5 hover:text-primary border-b-2 border-transparent transition-all duration-200">About</a>
+                <a href="#services" class="nav-link py-5 hover:text-primary border-b-2 border-transparent transition-all duration-200">Services</a>
+                <a href="#quote" class="nav-link py-5 hover:text-primary border-b-2 border-transparent transition-all duration-200">Quote</a>
+                <a href="#testimonials" class="nav-link py-5 hover:text-primary border-b-2 border-transparent transition-all duration-200">Testimonial</a>
+                <a href="#contact" class="nav-link py-5 hover:text-primary border-b-2 border-transparent transition-all duration-200">Contact</a>
             </div>
 
             <!-- Header Phone Contact -->
@@ -102,7 +114,7 @@
                 </div>
                 <div>
                     <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Call for any query</p>
-                    <a href="tel:+17024269645" class="font-heading font-bold text-base hover:text-primary transition-colors">+1 702 426 9645</a>
+                    <a href="tel:+17024269645" class="font-heading font-bold text-base hover:text-primary transition-colors duration-200">+1 702 426 9645</a>
                 </div>
             </div>
 
@@ -112,7 +124,7 @@
             </button>
         </div>
 
-        <!-- Mobile Drawer Menu (Removed Pricing & Team) -->
+        <!-- Mobile Drawer Menu -->
         <div id="mobileDrawer" class="hidden lg:hidden bg-slate-900 border-t border-slate-800 transition-all duration-300">
             <div class="flex flex-col space-y-4 p-6 font-heading font-semibold text-slate-200 tracking-wide uppercase">
                 <a href="#home" class="mobile-link text-primary hover:text-primary transition-colors">Home</a>
@@ -139,7 +151,7 @@
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 text-left w-full">
             <div class="max-w-3xl">
                 <!-- Subtitle -->
-                <p class="text-primary font-heading font-bold text-sm sm:text-base tracking-widest uppercase mb-4 animate-bounce">
+                <p class="text-primary font-heading font-bold text-sm sm:text-base tracking-widest uppercase mb-4">
                     Transport & Logistics Solution
                 </p>
                 <!-- Title matching layout -->
@@ -152,10 +164,10 @@
                 </p>
                 <!-- Double CTA buttons -->
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="#tracker" class="px-8 py-4 primary-gradient hover:opacity-90 text-white font-heading font-bold rounded shadow-lg text-center tracking-wide uppercase transition-all transform hover:-translate-y-0.5">
+                    <a href="#tracker" class="px-8 py-4 primary-gradient hover:opacity-90 text-white font-heading font-bold rounded shadow-lg text-center tracking-wide uppercase transition-all duration-200 transform hover:-translate-y-0.5">
                         <i class="fa-solid fa-magnifying-glass mr-2"></i> Track Package
                     </a>
-                    <a href="#quote" class="px-8 py-4 bg-accentBlue hover:opacity-90 text-white font-heading font-bold rounded shadow-lg text-center tracking-wide uppercase transition-all transform hover:-translate-y-0.5">
+                    <a href="#quote" class="px-8 py-4 bg-accentBlue hover:opacity-90 text-white font-heading font-bold rounded shadow-lg text-center tracking-wide uppercase transition-all duration-200 transform hover:-translate-y-0.5">
                         Free Quote
                     </a>
                 </div>
@@ -179,7 +191,7 @@
                         </span>
                         <h3 class="text-3xl font-heading font-extrabold text-white mt-4">Enterprise Shipment Tracking</h3>
                         <p class="text-slate-400 text-sm mt-2 leading-relaxed">
-                            Search cargo databases for instant active route logs. Enter your unique tracking ID created on the server Operations portal.
+                            Search cargo databases for instant active route logs. Enter your unique tracking ID (e.g., try <strong class="text-primary font-mono select-all">SH-12345</strong>, <strong class="text-primary font-mono select-all font-semibold">SH-55555</strong>, or <strong class="text-primary font-mono select-all">SH-88888</strong>).
                         </p>
                     </div>
 
@@ -199,7 +211,7 @@
                 </div>
 
                 <!-- Dynamic Live Tracker Output Panel -->
-                <div id="trackingOutputPanel" class="hidden relative z-10 transition-all duration-500 animate-fadeIn">
+                <div id="trackingOutputPanel" class="hidden relative z-10 transition-all duration-500 ease-in-out">
                     
                     <!-- Top Status Strip -->
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
@@ -211,9 +223,9 @@
                             <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest block">Service Level</span>
                             <p id="trackService" class="text-lg font-heading font-semibold text-sky-400 mt-1">-</p>
                         </div>
-                        <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/60 font-semibold">
+                        <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/60">
                             <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest block">Latest Checkpoint</span>
-                            <p id="trackLoc" class="text-lg text-slate-100 truncate mt-1">-</p>
+                            <p id="trackLoc" class="text-lg text-slate-100 truncate mt-1 font-semibold">-</p>
                         </div>
                         <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/60">
                             <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest block">Delivery Target</span>
@@ -229,7 +241,7 @@
                         </div>
                         <div class="relative py-4">
                             <!-- Horizontal Progress line connecting circles -->
-                            <div class="absolute top-[2.2rem] left-1/2 -translate-x-1/2 w-[85%] h-1 bg-slate-800 -z-0 hidden md:block" id="progressLineFill"></div>
+                            <div class="absolute top-[2.2rem] left-[10%] w-[80%] h-1 bg-slate-800 -z-0 hidden md:block" id="progressLineFill"></div>
 
                             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
                                 <!-- Step 1 -->
@@ -301,7 +313,7 @@
 
                             <!-- Styled Vector Barcode representation -->
                             <div class="bg-white text-slate-950 p-4 rounded-xl text-center shadow-inner mt-4">
-                                <div id="trackBarcodeGraphic" class="font-mono text-2xl tracking-[0.25em] font-light select-none select-all">|||||| || | || |||| | | |||</div>
+                                <div id="trackBarcodeGraphic" class="font-mono text-2xl tracking-[0.25em] font-light select-all">|||||| || | || |||| | | |||</div>
                                 <div class="text-[10px] text-slate-500 mt-2 font-mono tracking-wider uppercase font-semibold">Security Verification Barcode</div>
                             </div>
 
@@ -332,7 +344,7 @@
     </section>
 
     <!-- EXPLORE SERVICES SECTION -->
-    <section id="services" class="py-20 lg:py-28 bg-lightBg no-print">
+    <section id="services" class="py-20 lg:py-28 bg-lightBg no-print scroll-mt-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header Text -->
             <div class="text-center max-w-2xl mx-auto mb-16">
@@ -355,7 +367,7 @@
                             Priority air transportation solutions utilizing scheduled flights and chartered cargo aircraft to guarantee rapid, time-critical delivery to global destinations.
                         </p>
                         <div class="mt-auto">
-                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300" aria-label="Request quote for Air Freight">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>
@@ -374,7 +386,7 @@
                             Cost-efficient ocean transportation for full container loads (FCL) and less-than-container loads (LCL), managed through strategic agreements with major global ocean carriers.
                         </p>
                         <div class="mt-auto">
-                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300" aria-label="Request quote for Ocean Freight">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>
@@ -393,7 +405,7 @@
                             Flexible long-haul trucking and door-to-door distribution services across extensive domestic networks, using GPS-tracked, modern, and temperature-controlled fleets.
                         </p>
                         <div class="mt-auto">
-                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300" aria-label="Request quote for Road Freight">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>
@@ -412,7 +424,7 @@
                             Sustainable, high-capacity overland rail transit linking major industrial zones, providing an ideal balance between transit speed and shipping budget constraints.
                         </p>
                         <div class="mt-auto">
-                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300" aria-label="Request quote for Train Freight">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>
@@ -431,7 +443,7 @@
                             Streamlined brokerage and compliance services managed by certified agents to fast-track import and export customs processing at air hubs, land borders, and ocean ports.
                         </p>
                         <div class="mt-auto">
-                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300" aria-label="Request quote for Customs Clearance">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>
@@ -441,7 +453,6 @@
                 <!-- Warehouse Solutions -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
-                        <!-- High resolution, active warehouse fulfillment imagery -->
                         <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Warehouse Solutions" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/800x600?text=Warehouse+Solutions'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
@@ -451,7 +462,7 @@
                             State-of-the-art secure storage with digital manifest control, advanced stock tracking, thermal containment options, and express dispatch docks.
                         </p>
                         <div class="mt-auto">
-                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300" aria-label="Request quote for Warehouse Solutions">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>
@@ -462,7 +473,7 @@
     </section>
 
     <!-- TWO-COLUMN ABOUT & TRUSTED LOGISTICS -->
-    <section id="about" class="py-20 lg:py-28 bg-white no-print">
+    <section id="about" class="py-20 lg:py-28 bg-white no-print scroll-mt-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Left Column: Custom Delivery worker holding box -->
@@ -567,7 +578,7 @@
                         </div>
                         <div class="text-center sm:text-left">
                             <p class="text-xs text-slate-500 font-bold uppercase tracking-wider">Call for any query</p>
-                            <a href="tel:+0123456789" class="font-heading font-bold text-lg text-secondary hover:text-primary transition-colors">+012 345 6789</a>
+                            <a href="tel:+17024269645" class="font-heading font-bold text-lg text-secondary hover:text-primary transition-colors duration-200">+1 702 426 9645</a>
                         </div>
                     </div>
                 </div>
@@ -579,7 +590,7 @@
                         <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
                             <i class="fa-solid fa-users"></i>
                         </div>
-                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="10447">10,447+</span>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="10447">0</span>
                         <span class="text-sm font-semibold text-rose-100 uppercase tracking-wider">Happy Clients</span>
                     </div>
 
@@ -588,7 +599,7 @@
                         <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
                             <i class="fa-solid fa-star"></i>
                         </div>
-                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="1234">1,234</span>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="1234">0</span>
                         <span class="text-sm font-semibold text-emerald-100 uppercase tracking-wider">Customer Reviews</span>
                     </div>
 
@@ -597,7 +608,7 @@
                         <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
                             <i class="fa-solid fa-ship"></i>
                         </div>
-                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="20234+">20,234+</span>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="20234">0</span>
                         <span class="text-sm font-semibold text-sky-100 uppercase tracking-wider">Complete Shipments</span>
                     </div>
 
@@ -606,7 +617,7 @@
                         <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
                             <i class="fa-solid fa-user-tie"></i>
                         </div>
-                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="998">998</span>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="998">0</span>
                         <span class="text-sm font-semibold text-slate-300 uppercase tracking-wider">Expert Workers</span>
                     </div>
                 </div>
@@ -615,7 +626,7 @@
     </section>
 
     <!-- REQUEST FREE QUOTE SECTION -->
-    <section id="quote" class="py-20 lg:py-28 bg-white no-print">
+    <section id="quote" class="py-20 lg:py-28 bg-white no-print scroll-mt-10">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <!-- Centered Quote Form Panel -->
@@ -641,7 +652,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label for="quotePhone" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Your Phone</label>
-                            <input type="tel" id="quotePhone" placeholder="+123 456 7890" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                            <input type="tel" id="quotePhone" required placeholder="+1 702 426 9645" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
                         </div>
                         <div>
                             <label for="quoteService" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Select A Service</label>
@@ -670,7 +681,7 @@
     </section>
 
     <!-- TESTIMONIAL CAROUSEL SECTION -->
-    <section id="testimonials" class="py-20 lg:py-28 bg-lightBg border-t border-slate-100 overflow-hidden no-print">
+    <section id="testimonials" class="py-20 lg:py-28 bg-lightBg border-t border-slate-100 overflow-hidden no-print scroll-mt-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header Text -->
             <div class="text-center max-w-2xl mx-auto mb-16">
@@ -679,9 +690,9 @@
                 <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
             </div>
 
-            <!-- Interactive testimonial cards slider space -->
-            <div class="relative max-w-4xl mx-auto">
-                <div id="testimonialContainer" class="flex transition-transform duration-500 ease-in-out">
+            <!-- Interactive testimonial cards slider space (Ensured layout overflow-hidden structure) -->
+            <div class="relative max-w-4xl mx-auto overflow-hidden rounded-xl">
+                <div id="testimonialContainer" class="flex transition-transform duration-500 ease-in-out w-full">
                     <!-- Testimonial 1 -->
                     <div class="w-full flex-shrink-0 px-4">
                         <div class="bg-white rounded-xl p-8 sm:p-10 shadow-lg relative border border-slate-100">
@@ -692,7 +703,7 @@
                                 "Shipment has completely transformed our global distribution model. Their real-time telemetry tracking and automated customs brokerage saved us over 40 hours of administrative overhead in our first month. The transit timelines are incredibly precise."
                             </p>
                             <div class="flex items-center space-x-4">
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Client 1" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.src='https://placehold.co/150x150?text=Client+1'">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Daniel Carter" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.src='https://placehold.co/150x150?text=Client+1'">
                                 <div>
                                     <h4 class="text-base font-heading font-bold text-secondary">Daniel Carter</h4>
                                     <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold">Logistics Manager, TechCorp</p>
@@ -710,7 +721,7 @@
                                 "Operating a complex, nationwide retail supply chain requires flawless timing. Shipment delivers consistent reliability across our road and rail operations. Their instant rate estimator makes logistics planning painless."
                             </p>
                             <div class="flex items-center space-x-4">
-                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Client 2" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.src='https://placehold.co/150x150?text=Client+2'">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Sophia Bennett" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.src='https://placehold.co/150x150?text=Client+2'">
                                 <div>
                                     <h4 class="text-base font-heading font-bold text-secondary">Sophia Bennett</h4>
                                     <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold">Supply Chain Dir, PrimeGoods</p>
@@ -728,7 +739,7 @@
                                 "During a critical sea-freight customs hold, Shipment's dedicated support agents intervened immediately to update declaration files. Their proactive service saved us thousands in potential port delays."
                             </p>
                             <div class="flex items-center space-x-4">
-                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Client 3" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.src='https://placehold.co/150x150?text=Client+3'">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Ethan Vance" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.src='https://placehold.co/150x150?text=Client+3'">
                                 <div>
                                     <h4 class="text-base font-heading font-bold text-secondary">Ethan Vance</h4>
                                     <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold">COO, GlobaRetail</p>
@@ -737,28 +748,28 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Slider Indicators / Buttons -->
-                <div class="flex justify-center items-center space-x-3 mt-10">
-                    <button onclick="prevSlide()" class="w-10 h-10 rounded-full bg-white text-secondary shadow-md hover:bg-primary hover:text-white transition-colors border border-slate-100 flex items-center justify-center">
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </button>
-                    <!-- Dot indicators -->
-                    <div class="flex space-x-2">
-                        <button onclick="goToSlide(0)" class="slide-dot w-3 h-3 rounded-full bg-primary transition-colors duration-300"></button>
-                        <button onclick="goToSlide(1)" class="slide-dot w-3 h-3 rounded-full bg-slate-300 hover:bg-slate-400 transition-colors duration-300"></button>
-                        <button onclick="goToSlide(2)" class="slide-dot w-3 h-3 rounded-full bg-slate-300 hover:bg-slate-400 transition-colors duration-300"></button>
-                    </div>
-                    <button onclick="nextSlide()" class="w-10 h-10 rounded-full bg-white text-secondary shadow-md hover:bg-primary hover:text-white transition-colors border border-slate-100 flex items-center justify-center">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
+            <!-- Slider Indicators / Buttons -->
+            <div class="flex justify-center items-center space-x-3 mt-8 max-w-4xl mx-auto">
+                <button onclick="prevSlide()" class="w-10 h-10 rounded-full bg-white text-secondary shadow-md hover:bg-primary hover:text-white transition-colors border border-slate-100 flex items-center justify-center" aria-label="Previous Testimonial">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <!-- Dot indicators -->
+                <div class="flex space-x-2">
+                    <button onclick="goToSlide(0)" class="slide-dot w-3 h-3 rounded-full bg-primary transition-colors duration-300" aria-label="Testimonial Slide 1"></button>
+                    <button onclick="goToSlide(1)" class="slide-dot w-3 h-3 rounded-full bg-slate-300 hover:bg-slate-400 transition-colors duration-300" aria-label="Testimonial Slide 2"></button>
+                    <button onclick="goToSlide(2)" class="slide-dot w-3 h-3 rounded-full bg-slate-300 hover:bg-slate-400 transition-colors duration-300" aria-label="Testimonial Slide 3"></button>
                 </div>
+                <button onclick="nextSlide()" class="w-10 h-10 rounded-full bg-white text-secondary shadow-md hover:bg-primary hover:text-white transition-colors border border-slate-100 flex items-center justify-center" aria-label="Next Testimonial">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </section>
 
     <!-- CONTACT & GET IN TOUCH -->
-    <section id="contact" class="py-20 lg:py-28 bg-white no-print">
+    <section id="contact" class="py-20 lg:py-28 bg-white no-print scroll-mt-10">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2">Get In Touch</p>
             <h2 class="text-secondary font-heading font-extrabold text-3xl sm:text-4xl mb-6">Contact Us For Any Inquiry</h2>
@@ -766,7 +777,7 @@
                 Our experts are available 24/7 to solve your logistics, transport, tracking and freight management inquiries. Reach out to us via any channel or submit the request form.
             </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
                 <!-- Address Card -->
                 <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center text-center">
                     <div class="bg-primary/10 text-primary p-4 rounded-full mb-4"><i class="fa-solid fa-map-marker-alt text-xl"></i></div>
@@ -777,13 +788,13 @@
                 <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center text-center">
                     <div class="bg-primary/10 text-primary p-4 rounded-full mb-4"><i class="fa-solid fa-phone-alt text-xl"></i></div>
                     <h4 class="font-heading font-bold text-secondary text-base">Emergency Phone</h4>
-                    <p class="text-slate-500 text-sm mt-2 font-medium">+1 702 426 9645</p>
+                    <a href="tel:+17024269645" class="text-slate-500 text-sm mt-2 font-medium hover:text-primary transition-colors">+1 702 426 9645</a>
                 </div>
                 <!-- Email Card -->
                 <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center text-center">
                     <div class="bg-primary/10 text-primary p-4 rounded-full mb-4"><i class="fa-solid fa-envelope text-xl"></i></div>
                     <h4 class="font-heading font-bold text-secondary text-base">Email Support</h4>
-                    <p class="text-slate-500 text-sm mt-2 font-medium">info@example.com</p>
+                    <a href="mailto:info@example.com" class="text-slate-500 text-sm mt-2 font-medium hover:text-primary transition-colors">info@example.com</a>
                 </div>
             </div>
         </div>
@@ -849,7 +860,7 @@
 
             <!-- Footer Bottom Border Line -->
             <div class="border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
-                <p>&copy; <span id="2023">2023</span> Shipment. All Rights Reserved.</p>
+                <p>&copy; <span id="currentYear">2026</span> Shipment. All Rights Reserved.</p>
                 <p class="mt-2 sm:mt-0">Designed by <a href="#" class="text-slate-400 hover:text-primary transition-colors">HTML Codex</a></p>
             </div>
         </div>
@@ -879,7 +890,7 @@
                 <h3 class="font-heading font-extrabold text-lg text-secondary">
                     <i class="fa-solid fa-file-invoice text-primary mr-2"></i> Cargo Manifest Bill of Lading
                 </h3>
-                <button onclick="closeManifestModal()" class="text-slate-400 hover:text-slate-900 text-xl"><i class="fa-solid fa-xmark"></i></button>
+                <button onclick="closeManifestModal()" class="text-slate-400 hover:text-slate-900 text-xl" aria-label="Close Manifest Modal"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
             <!-- Printed content sheet -->
@@ -934,10 +945,10 @@
                 <div class="border-t border-slate-300 pt-4 flex justify-between items-center">
                     <div>
                         <p class="text-[9px] text-slate-400 font-mono tracking-wider uppercase font-bold mb-1">Digital Manifest Key</p>
-                        <div id="manBarcode" class="font-mono text-lg tracking-[0.1em] text-slate-900 font-light select-none">|||| || ||| | |||</div>
+                        <div id="manBarcode" class="font-mono text-lg tracking-[0.1em] text-slate-900 font-light">|||| || ||| | |||</div>
                     </div>
                     <div class="text-right">
-                        <p class="text-[10px] font-bold text-slate-800">Shipment Intelligence Systems Inc.</p>
+                        <p class="text-[10px] font-bold text-slate-800">Shipment Logistics Solutions Inc.</p>
                         <p class="text-[9px] text-slate-400 mt-0.5">Signature Verified Electronically</p>
                     </div>
                 </div>
@@ -955,8 +966,76 @@
         </div>
     </div>
 
+    <!-- Hidden iframe for background printing to prevent state loss -->
+    <iframe id="printFrame" style="position: absolute; width: 0; height: 0; border: 0;" src="about:blank" title="Print Frame"></iframe>
+
     <!-- JAVASCRIPT LOGIC -->
     <script>
+        // Inline Mock Cargo Database for instant localized resolver (No live-server requirement needed!)
+        const fallbackDatabase = {
+            "SH-12345": {
+                waybill: "SH-12345",
+                service: "Priority Air Freight",
+                location: "JFK Intl Airport, Terminal 4 - Queens, NY",
+                eta: "May 30, 2026",
+                shipper: "Heidelberg Parts GmbH",
+                receiver: "Apex Precision Print Inc.",
+                weight: "482.50 kg",
+                dimensions: "120 x 80 x 95 cm",
+                tempSensor: "18.4 °C (Stable)",
+                barcode: "||| |||| | || |||| | | |||",
+                status: "In Transit",
+                badgeClass: "bg-amber-100 text-amber-800 border border-amber-300",
+                step: 3,
+                times: ["May 24, 09:12 AM", "May 25, 14:30 PM", "May 26, 02:44 AM", "Pending Cargo Gate"],
+                timeline: [
+                    { time: "May 26, 02:44 AM", loc: "New York JFK Hub", icon: "fa-plane-import", event: "Import Customs Cleared & Transferred", desc: "Cargo cleared local port inspection protocols. Pre-sorted onto local road-feeder fleet delivery schedules." },
+                    { time: "May 25, 14:30 PM", loc: "Frankfurt Airport FRA", icon: "fa-plane-departure", event: "Transatlantic Flight Departed", desc: "Successfully loaded onto premium commercial air carrier freighter flight LH8402." },
+                    { time: "May 24, 09:12 AM", loc: "Frankfurt Hub, DE", icon: "fa-warehouse", event: "Manifest Initiated & Cargo Handover", desc: "Consignment securely packaged at Frankfurt industrial park, sealed, and prepared for airport transfer." }
+                ]
+            },
+            "SH-55555": {
+                waybill: "SH-55555",
+                service: "Express Road Freight",
+                location: "Fulfillment Dock 12, Chicago Logistics Hub",
+                eta: "Delivered (Today)",
+                shipper: "ElectroStore Global Supply",
+                receiver: "John Smith, Distributor",
+                weight: "12.40 kg",
+                dimensions: "40 x 40 x 30 cm",
+                tempSensor: "22.1 °C (Ambient)",
+                barcode: "|| || |||| | || | ||| || ||",
+                status: "Delivered",
+                badgeClass: "bg-emerald-100 text-emerald-800 border border-emerald-300",
+                step: 4,
+                times: ["May 26, 08:00 AM", "May 26, 11:30 AM", "May 27, 09:00 AM", "May 28, 08:45 AM"],
+                timeline: [
+                    { time: "May 28, 08:45 AM", loc: "Chicago, IL", icon: "fa-handshake", event: "Delivered & Signed", desc: "Cargo handover successfully completed. Proof of delivery signature verified electronically." },
+                    { time: "May 27, 09:00 AM", loc: "Chicago Hub Depot", icon: "fa-truck-ramp-box", event: "Out for Final Mile Delivery", desc: "Dispatched to local courier route. Direct tracking live coordinates established." },
+                    { time: "May 26, 11:30 AM", loc: "Indianapolis Depot", icon: "fa-truck-fast", event: "In Route Transit", desc: "Traversing interstate highway logistics network, GPS tracker operational and healthy." }
+                ]
+            },
+            "SH-88888": {
+                waybill: "SH-88888",
+                service: "Ocean Freight Cargo",
+                location: "Port of Rotterdam Container Terminals",
+                eta: "June 12, 2026",
+                shipper: "Tokyo Industrial Parts",
+                receiver: "Euro-Build Engineering",
+                weight: "14,850.00 kg",
+                dimensions: "6.1 x 2.4 x 2.6 m",
+                tempSensor: "16.8 °C (Cold-Chain Active)",
+                barcode: "|||||| || | || |||| | | |||",
+                status: "Pre-Freight Intake",
+                badgeClass: "bg-blue-100 text-blue-800 border border-blue-300",
+                step: 1,
+                times: ["May 28, 07:00 AM", "Pending Handover", "Pending Port Gate", "Pending Port Release"],
+                timeline: [
+                    { time: "May 28, 07:00 AM", loc: "Tokyo Sea Terminal", icon: "fa-receipt", event: "Manifest Received & Validated", desc: "Digital documentation matching cargo declaration submitted. Secure freight vessel allocation scheduled." }
+                ]
+            }
+        };
+
         // Track Mobile Menu Drawer status
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileDrawer = document.getElementById('mobileDrawer');
@@ -978,6 +1057,33 @@
                 mobileMenuBtn.querySelector('i').className = 'fa-solid fa-bars';
             });
         });
+
+        // Highlight Active Link on Scroll (Intersection Observer for Premium UX)
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px',
+            threshold: 0
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeId = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('href') === `#${activeId}`) {
+                            link.classList.add('nav-active');
+                        } else {
+                            link.classList.remove('nav-active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => sectionObserver.observe(section));
 
         // Testimonial Carousel logic
         let currentSlideIndex = 0;
@@ -1001,13 +1107,33 @@
             updateSlider();
         }
 
+        function prevSlide() {
+            currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            updateSlider();
+        }
+
         // Auto slide every 8 seconds
-        setInterval(nextSlide, 8000);
+        let slideTimer = setInterval(nextSlide, 8000);
+
+        // Pause/Restart auto slide on mouse interactions
+        const sliderWrapper = document.getElementById('testimonials');
+        if (sliderWrapper) {
+            sliderWrapper.addEventListener('mouseenter', () => clearInterval(slideTimer));
+            sliderWrapper.addEventListener('mouseleave', () => {
+                clearInterval(slideTimer);
+                slideTimer = setInterval(nextSlide, 8000);
+            });
+        }
 
         // Stats counter animation logic
         const counters = document.querySelectorAll('.count-up');
         const options = {
-            threshold: 0.5,
+            threshold: 0.25,
             rootMargin: "0px"
         };
 
@@ -1017,15 +1143,15 @@
                     const counter = entry.target;
                     const target = parseInt(counter.getAttribute('data-target'));
                     let count = 0;
-                    const speed = target / 80; // duration control
+                    const speed = target / 60; // duration control
 
                     const updateCount = () => {
                         if (count < target) {
                             count = Math.min(target, Math.ceil(count + speed));
-                            counter.innerText = count.toLocaleString();
+                            counter.innerText = count.toLocaleString() + (counter.getAttribute('data-target').includes('+') ? '+' : '');
                             setTimeout(updateCount, 15);
                         } else {
-                            counter.innerText = target.toLocaleString();
+                            counter.innerText = target.toLocaleString() + (counter.getAttribute('data-target').includes('+') ? '+' : '');
                         }
                     };
 
@@ -1038,7 +1164,10 @@
         counters.forEach(counter => countObserver.observe(counter));
 
         // Year updater
-        document.getElementById('currentYear').innerText = new Date().getFullYear();
+        const currentYearEl = document.getElementById('currentYear');
+        if (currentYearEl) {
+            currentYearEl.innerText = new Date().getFullYear();
+        }
 
         // Modal triggers
         const statusModal = document.getElementById('statusModal');
@@ -1106,24 +1235,35 @@
 
             let result = null;
 
+            // Step A: Attempt server fetch first (to preserve existing backend integration)
             try {
-                // Request shipment metadata from the external live Node.js Express server
-                const response = await fetch(`http://localhost:3000/api/shipments/${query}`);
+                // Configurable delay timeout so we do not hang on offline environments
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 1500);
+
+                const response = await fetch(`http://localhost:3000/api/shipments/${query}`, { signal: controller.signal });
+                clearTimeout(timeoutId);
+
                 if (response.ok) {
                     result = await response.json();
                 } else {
-                    console.warn(`Live server returned non-OK status code: ${response.status}`);
+                    console.warn(`Live server returned non-OK status code: ${response.status}. Trying fallback fallbackDatabase...`);
                 }
             } catch (err) {
-                console.warn('API database connection failed:', err);
+                console.warn('Backend connection bypassed or failed. Directing search to local memory cache:', err.message);
             }
 
-            // If the shipment is not found on your Node.js backend server, cleanly raise an unregistered alert
+            // Step B: Resolve locally via mock database fallback
+            if (!result && fallbackDatabase[query]) {
+                result = fallbackDatabase[query];
+            }
+
+            // Step C: Fallback error if completely unregistered
             if (!result) {
                 outputPanel.classList.add('hidden');
                 openStatusModal(
                     "Shipment ID Unregistered", 
-                    `The Waybill Code "${query}" could not be recognized on our active database records. Please verify your tracking ID with your dispatch hub manager.`, 
+                    `The Waybill Code "${query}" could not be recognized on our active database records. Please try using "SH-12345", "SH-55555", or "SH-88888" as a query.`, 
                     false
                 );
                 return;
@@ -1170,10 +1310,12 @@
 
             // Animate connector line progress
             const progressLine = document.getElementById('progressLineFill');
-            if (result.step === 1) progressLine.style.background = 'linear-gradient(to right, #FF3E41 0%, #1e293b 20%)';
-            else if (result.step === 2) progressLine.style.background = 'linear-gradient(to right, #FF3E41 40%, #1e293b 50%)';
-            else if (result.step === 3) progressLine.style.background = 'linear-gradient(to right, #FF3E41 70%, #1e293b 80%)';
-            else if (result.step === 4) progressLine.style.background = '#FF3E41';
+            if (progressLine) {
+                if (result.step === 1) progressLine.style.background = 'linear-gradient(to right, #FF3E41 0%, #1e293b 20%)';
+                else if (result.step === 2) progressLine.style.background = 'linear-gradient(to right, #FF3E41 40%, #1e293b 50%)';
+                else if (result.step === 3) progressLine.style.background = 'linear-gradient(to right, #FF3E41 70%, #1e293b 80%)';
+                else if (result.step === 4) progressLine.style.background = '#FF3E41';
+            }
 
             // Build Route Log Ledger list dynamically
             const timelineContainer = document.getElementById('timelineLedgerContainer');
@@ -1182,7 +1324,7 @@
             result.timeline.forEach((event, idx) => {
                 const isActive = idx === 0;
                 const itemHTML = `
-                    <div class="relative pl-6 animate-fadeIn">
+                    <div class="relative pl-6">
                         <!-- Left indicator circle dot -->
                         <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-2 ${isActive ? 'bg-primary border-primary animate-pulse' : 'bg-slate-900 border-slate-700'} flex items-center justify-center">
                             <div class="w-1.5 h-1.5 rounded-full ${isActive ? 'bg-white' : 'bg-slate-700'}"></div>
@@ -1206,7 +1348,9 @@
 
             // Make container visible
             outputPanel.classList.remove('hidden');
-            outputPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            setTimeout(() => {
+                outputPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
         }
 
         /* ACTIONS: MANIFEST / PRINT DOCUMENT UTILITIES */
@@ -1225,7 +1369,7 @@
             document.getElementById('manWeight').innerText = data.weight;
             document.getElementById('manDimensions').innerText = data.dimensions;
             document.getElementById('manBarcode').innerText = data.barcode;
-            document.getElementById('manifestStatusTag').innerText = data.status;
+            document.getElementById('manifestStatusTag').innerText = data.status.toUpperCase();
 
             // Open manifest modal window
             manifestModal.classList.remove('hidden');
@@ -1235,20 +1379,55 @@
             manifestModal.classList.add('hidden');
         }
 
+        // Production-Grade Print Function (Uses hidden iframe to prevent memory, script bindings & layout state loss!)
         function printManifest() {
-            // Trigger standard print layout on manifest print section
-            const printContents = document.getElementById('manifestPrintArea').innerHTML;
-            const originalContents = document.body.innerHTML;
+            const printAreaContents = document.getElementById('manifestPrintArea').innerHTML;
+            const printFrame = document.getElementById('printFrame');
+            
+            if (!printFrame) {
+                console.error("Print frame placeholder could not be found.");
+                return;
+            }
 
-            document.body.innerHTML = `
-                <div style="background: white; color: black; padding: 40px; font-family: sans-serif;">
-                    ${printContents}
-                </div>
-            `;
-            window.print();
-            document.body.innerHTML = originalContents;
-            // Rebind listeners quickly
-            window.location.reload();
+            const frameDoc = printFrame.contentWindow || printFrame.contentDocument;
+            const doc = frameDoc.document || frameDoc;
+
+            doc.open();
+            doc.write(`
+                <html>
+                    <head>
+                        <title>Bill of Lading Manifest - Shipment</title>
+                        <style>
+                            body { font-family: 'Inter', system-ui, sans-serif; padding: 30px; color: #1e293b; background: white; }
+                            .bg-slate-50 { background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 25px; border-radius: 12px; }
+                            .text-right { text-align: right; }
+                            .flex { display: flex; justify-content: space-between; }
+                            .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+                            .mb-6 { margin-bottom: 24px; }
+                            .pb-4 { padding-bottom: 16px; border-b: 1px solid #cbd5e1; }
+                            .border-t { border-top: 1px solid #cbd5e1; padding-top: 16px; }
+                            .text-primary { color: #FF3E41; }
+                            table { width: 100%; border-collapse: collapse; margin-top: 20px; margin-bottom: 20px; }
+                            th, td { border: 1px solid #cbd5e1; padding: 8px; text-align: left; font-size: 11px; }
+                            th { background-color: #f1f5f9; font-weight: bold; text-transform: uppercase; }
+                            .font-mono { font-family: monospace; }
+                            .font-bold { font-weight: bold; }
+                            .uppercase { text-transform: uppercase; }
+                            .bg-primary\\/10 { background-color: rgba(255, 62, 65, 0.1); color: #FF3E41; padding: 4px 8px; border-radius: 4px; font-weight: 800; font-size: 10px; }
+                        </style>
+                    </head>
+                    <body>
+                        ${printAreaContents}
+                    </body>
+                </html>
+            `);
+            doc.close();
+
+            // Trigger silent print of background context safely
+            setTimeout(() => {
+                printFrame.contentWindow.focus();
+                printFrame.contentWindow.print();
+            }, 350);
         }
 
         function triggerLiveChat() {
