@@ -65,7 +65,7 @@
     <!-- TOP HEADER / PHONE STRIP -->
     <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 lg:px-8 hidden md:flex justify-between items-center border-b border-slate-800 no-print">
         <div class="flex items-center space-x-6">
-            <span class="flex items-center"><i class="fa-solid fa-map-marker-alt text-primary mr-2"></i> 123 Street, New York, USA</span>
+            <span class="flex items-center"><i class="fa-solid fa-map-marker-alt text-primary mr-2"></i> Brooklyn, New York, USA</span>
             <span class="flex items-center"><i class="fa-solid fa-envelope text-primary mr-2"></i> info@example.com</span>
         </div>
         <div class="flex items-center space-x-4">
@@ -102,7 +102,7 @@
                 </div>
                 <div>
                     <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Call for any query</p>
-                    <a href="tel:+0123456789" class="font-heading font-bold text-base hover:text-primary transition-colors">+012 345 6789</a>
+                    <a href="tel:+17024269645" class="font-heading font-bold text-base hover:text-primary transition-colors">+1 702 426 9645</a>
                 </div>
             </div>
 
@@ -125,7 +125,7 @@
                 <hr class="border-slate-800 my-2">
                 <div class="flex items-center space-x-3">
                     <i class="fa-solid fa-phone-alt text-primary"></i>
-                    <a href="tel:+0123456789" class="font-bold text-white tracking-wide">+012 345 6789</a>
+                    <a href="tel:+17024269645" class="font-bold text-white tracking-wide">+1 702 426 9645</a>
                 </div>
             </div>
         </div>
@@ -172,19 +172,14 @@
                 <div class="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full filter blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
 
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10 border-b border-slate-800 pb-8 mb-8">
-                    <!-- Text Info -->
+                    <!-- Text Info (identifiers safely removed from here) -->
                     <div class="max-w-md">
                         <span class="bg-primary/15 text-primary border border-primary/30 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full inline-flex items-center gap-1.5">
                             <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span> Live Global Telemetry
                         </span>
                         <h3 class="text-3xl font-heading font-extrabold text-white mt-4">Enterprise Shipment Tracking</h3>
                         <p class="text-slate-400 text-sm mt-2 leading-relaxed">
-                            Search cargo databases for instant active route logs. Try demo identifiers:
-                            <span class="block mt-1 font-mono text-xs">
-                                <button onclick="fillDemoID('SH-99210')" class="text-primary hover:underline font-bold mr-3">SH-99210 (In Transit)</button>
-                                <button onclick="fillDemoID('SH-44023')" class="text-emerald-400 hover:underline font-bold mr-3">SH-44023 (Delivered)</button>
-                                <button onclick="fillDemoID('SH-55731')" class="text-rose-400 hover:underline font-bold">SH-55731 (Customs Hold)</button>
-                            </span>
+                            Search cargo databases for instant active route logs. Enter your unique tracking ID to see real-time updates on your freight's journey, including location, status, and estimated delivery time.
                         </p>
                     </div>
 
@@ -193,7 +188,7 @@
                         <form onsubmit="handleLiveTrack(event)" class="relative flex flex-col sm:flex-row gap-3">
                             <div class="relative flex-grow">
                                 <i class="fa-solid fa-box-open absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
-                                <input type="text" id="trackingIDInput" required placeholder="e.g. SH-99210" class="w-full bg-slate-950 border border-slate-800 rounded-lg pl-11 pr-4 py-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-mono tracking-wider text-white text-lg">
+                                <input type="text" id="trackingIDInput" required placeholder="e.g. SH-12345" class="w-full bg-slate-950 border border-slate-800 rounded-lg pl-11 pr-4 py-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-mono tracking-wider text-white text-lg">
                             </div>
                             <button type="submit" class="px-8 py-4 bg-primary text-white font-heading font-bold uppercase tracking-wider rounded-lg hover:bg-rose-700 transition-colors flex items-center justify-center space-x-2 shrink-0">
                                 <i class="fa-solid fa-satellite-dish text-lg"></i>
@@ -370,7 +365,7 @@
                 <!-- Ocean Freight -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
-                        <img src="https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&w=600&q=80" alt="Ocean Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Ocean+Freight'">
+                        <img src="https://images.unsplash.com/photo-1585713181935-d5f622cc2415?auto=format&fit=crop&w=600&q=80" alt="Ocean Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Ocean+Freight'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -408,7 +403,7 @@
                 <!-- Train Freight -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
-                        <img src="https://images.unsplash.com/photo-1515162305285-0293e4767cc2?auto=format&fit=crop&w=600&q=80" alt="Train Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Train+Freight'">
+                        <img src="https://images.unsplash.com/photo-1592844002373-a55ecd7af140?auto=format&fit=crop&w=600&q=80" alt="Train Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Train+Freight'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -427,7 +422,7 @@
                 <!-- Customs Clearance -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
-                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" alt="Customs Clearance" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Customs+Clearance'">
+                        <img src="https://images.unsplash.com/photo-1739877907105-2e578ee67bca?auto=format&fit=crop&w=600&q=80" alt="Customs Clearance" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Customs+Clearance'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -547,7 +542,7 @@
                 <!-- Right Side: Workers photo grid -->
                 <div class="order-1 lg:order-2">
                     <div class="relative overflow-hidden rounded-lg shadow-xl">
-                        <img src="https://images.unsplash.com/photo-1521791136368-1a46827d0adf?auto=format&fit=crop&w=800&q=80" alt="Trusted Shipment Workers" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/800x600?text=Trusted+Warehouse'">
+                        <img src="https://images.unsplash.com/photo-1740914994657-f1cdffdc418e?auto=format&fit=crop&w=800&q=80" alt="Trusted Shipment Workers" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/800x600?text=Trusted+Warehouse'">
                     </div>
                 </div>
             </div>
@@ -584,7 +579,7 @@
                         <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
                             <i class="fa-solid fa-users"></i>
                         </div>
-                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="1234">1,234</span>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="10447">10,447+</span>
                         <span class="text-sm font-semibold text-rose-100 uppercase tracking-wider">Happy Clients</span>
                     </div>
 
@@ -593,7 +588,7 @@
                         <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
                             <i class="fa-solid fa-star"></i>
                         </div>
-                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="1234">1,234</span>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="2448">2,448</span>
                         <span class="text-sm font-semibold text-emerald-100 uppercase tracking-wider">Customer Reviews</span>
                     </div>
 
@@ -602,7 +597,7 @@
                         <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
                             <i class="fa-solid fa-ship"></i>
                         </div>
-                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="1234">1,234</span>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="20234+">20,234+</span>
                         <span class="text-sm font-semibold text-sky-100 uppercase tracking-wider">Complete Shipments</span>
                     </div>
 
@@ -611,7 +606,7 @@
                         <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
                             <i class="fa-solid fa-user-tie"></i>
                         </div>
-                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="98">98</span>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="998">968</span>
                         <span class="text-sm font-semibold text-slate-300 uppercase tracking-wider">Expert Workers</span>
                     </div>
                 </div>
@@ -776,13 +771,13 @@
                 <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center text-center">
                     <div class="bg-primary/10 text-primary p-4 rounded-full mb-4"><i class="fa-solid fa-map-marker-alt text-xl"></i></div>
                     <h4 class="font-heading font-bold text-secondary text-base">Office Address</h4>
-                    <p class="text-slate-500 text-sm mt-2 font-medium">123 Street, New York, USA</p>
+                    <p class="text-slate-500 text-sm mt-2 font-medium">Brooklyn, New York, USA</p>
                 </div>
                 <!-- Phone Card -->
                 <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center text-center">
                     <div class="bg-primary/10 text-primary p-4 rounded-full mb-4"><i class="fa-solid fa-phone-alt text-xl"></i></div>
                     <h4 class="font-heading font-bold text-secondary text-base">Emergency Phone</h4>
-                    <p class="text-slate-500 text-sm mt-2 font-medium">+012 345 6789</p>
+                    <p class="text-slate-500 text-sm mt-2 font-medium">+1 702 426 9645</p>
                 </div>
                 <!-- Email Card -->
                 <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center text-center">
@@ -807,8 +802,8 @@
                         Providing premier, certified transport, global cargo shipping, and warehouse fulfillment across 180 countries since 1990.
                     </p>
                     <div class="space-y-3 text-sm">
-                        <p class="flex items-center"><i class="fa-solid fa-map-marker-alt text-primary mr-3 text-base"></i> 123 Street, New York, USA</p>
-                        <p class="flex items-center"><i class="fa-solid fa-phone-alt text-primary mr-3 text-base"></i> +012 345 6789</p>
+                        <p class="flex items-center"><i class="fa-solid fa-map-marker-alt text-primary mr-3 text-base"></i> Brooklyn, New York, USA</p>
+                        <p class="flex items-center"><i class="fa-solid fa-phone-alt text-primary mr-3 text-base"></i> +1 702 426 9645</p>
                         <p class="flex items-center"><i class="fa-solid fa-envelope text-primary mr-3 text-base"></i> info@example.com</p>
                     </div>
                 </div>
@@ -854,7 +849,7 @@
 
             <!-- Footer Bottom Border Line -->
             <div class="border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
-                <p>&copy; <span id="currentYear"></span> Shipment. All Rights Reserved.</p>
+                <p>&copy; <span id="2017">2017</span> Shipment. All Rights Reserved.</p>
                 <p class="mt-2 sm:mt-0">Designed by <a href="#" class="text-slate-400 hover:text-primary transition-colors">HTML Codex</a></p>
             </div>
         </div>
@@ -894,7 +889,7 @@
                     <div>
                         <h2 class="text-xl font-heading font-extrabold text-slate-950 uppercase tracking-wider">Shipment Logistics</h2>
                         <p class="text-[10px] text-slate-500 font-semibold uppercase mt-1">Waybill Declaration & Safety Bill</p>
-                        <p class="text-[10px] text-slate-400 mt-1">123 Logistics Plaza, NY, USA</p>
+                        <p class="text-[10px] text-slate-400 mt-1">12 Logistics Plaza, NY, USA</p>
                     </div>
                     <div class="text-right">
                         <span class="bg-primary/10 text-primary px-3 py-1.5 rounded font-extrabold uppercase text-[9px] tracking-wider" id="manifestStatusTag">IN TRANSIT</span>
@@ -1190,14 +1185,27 @@
             handleLiveTrack(new Event('submit'));
         }
 
-        function handleLiveTrack(e) {
-            if(e) e.preventDefault();
+        // Live API call tracking database resolver
+        async function handleLiveTrack(e) {
+            if (e) e.preventDefault();
             const query = document.getElementById('trackingIDInput').value.trim().toUpperCase();
             const outputPanel = document.getElementById('trackingOutputPanel');
 
-            let result = trackingDB[query];
+            let result = null;
 
-            // If not found in database, generate a rich dynamic transit log cleanly
+            try {
+                // Request shipment metadata from the external live Node.js Express server
+                const response = await fetch(`http://localhost:3000/api/shipments/${query}`);
+                if (response.ok) {
+                    result = await response.json();
+                } else {
+                    console.warn(`Live server returned non-OK status code: ${response.status}`);
+                }
+            } catch (err) {
+                console.warn('API database connection failed, resolving to local generator fallback:', err);
+            }
+
+            // Fallback generation logic if the API returns 404, fails, or server is offline
             if (!result) {
                 const randomSteps = Math.floor(Math.random() * 3) + 1; // 1, 2, or 3
                 const statuses = ["Manifest Prepared", "Consolidated", "In Route Transit"];
