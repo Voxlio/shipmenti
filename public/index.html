@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipment - Transport & Logistics Solutions</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF3E41', // Signature Coral/Red
+                        secondary: '#0F172A', // Deep Slate Blue
+                        accentBlue: '#06B6D4', // Cyan/Blue from Free Quote
+                        lightBg: '#F8FAFC',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom fine-tunings to match the reference look precisely */
+        .primary-gradient {
+            background: linear-gradient(135deg, #FF3E41 0%, #E11D48 100%);
+        }
+        .hero-overlay {
+            background: rgba(15, 23, 42, 0.75);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-600 bg-white selection:bg-primary selection:text-white">
+
+    <!-- TOP HEADER / PHONE STRIP -->
+    <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 lg:px-8 hidden md:flex justify-between items-center border-b border-slate-800 no-print">
+        <div class="flex items-center space-x-6">
+            <span class="flex items-center"><i class="fa-solid fa-map-marker-alt text-primary mr-2"></i> 123 Street, New York, USA</span>
+            <span class="flex items-center"><i class="fa-solid fa-envelope text-primary mr-2"></i> info@example.com</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <a href="#" class="hover:text-primary transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="hover:text-primary transition-colors"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="hover:text-primary transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="hover:text-primary transition-colors"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+    </div>
+
+    <!-- MAIN STICKY NAVIGATION -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md transition-all duration-300 no-print">
+        <div class="max-w-7xl mx-auto flex items-center justify-between pr-4 lg:pr-8">
+            <!-- Brand Logo with Red Box Background -->
+            <a href="#" class="bg-primary text-white font-heading font-extrabold text-2xl lg:text-3xl px-6 lg:px-10 py-5 flex items-center tracking-wider hover:opacity-95 transition-opacity">
+                <i class="fa-solid fa-box-open mr-2 text-xl lg:text-2xl"></i> Shipment
+            </a>
+
+            <!-- Desktop Links (Removed Pricing & Team) -->
+            <div class="hidden lg:flex items-center space-x-8 font-heading font-semibold text-sm text-slate-800 tracking-wide uppercase">
+                <a href="#home" class="text-primary hover:text-primary transition-colors">Home</a>
+                <a href="#tracker" class="hover:text-primary transition-colors">Track</a>
+                <a href="#about" class="hover:text-primary transition-colors">About</a>
+                <a href="#services" class="hover:text-primary transition-colors">Services</a>
+                <a href="#quote" class="hover:text-primary transition-colors">Quote</a>
+                <a href="#testimonials" class="hover:text-primary transition-colors">Testimonial</a>
+                <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+            </div>
+
+            <!-- Header Phone Contact -->
+            <div class="hidden md:flex items-center space-x-3 text-slate-800">
+                <div class="bg-slate-100 p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-all duration-300">
+                    <i class="fa-solid fa-phone-alt text-lg"></i>
+                </div>
+                <div>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Call for any query</p>
+                    <a href="tel:+0123456789" class="font-heading font-bold text-base hover:text-primary transition-colors">+012 345 6789</a>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Toggle -->
+            <button id="mobileMenuBtn" class="lg:hidden text-slate-800 text-2xl focus:outline-none p-2" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu (Removed Pricing & Team) -->
+        <div id="mobileDrawer" class="hidden lg:hidden bg-slate-900 border-t border-slate-800 transition-all duration-300">
+            <div class="flex flex-col space-y-4 p-6 font-heading font-semibold text-slate-200 tracking-wide uppercase">
+                <a href="#home" class="mobile-link text-primary hover:text-primary transition-colors">Home</a>
+                <a href="#tracker" class="mobile-link hover:text-primary transition-colors">Track</a>
+                <a href="#about" class="mobile-link hover:text-primary transition-colors">About</a>
+                <a href="#services" class="mobile-link hover:text-primary transition-colors">Services</a>
+                <a href="#quote" class="mobile-link hover:text-primary transition-colors">Quote</a>
+                <a href="#testimonials" class="mobile-link hover:text-primary transition-colors">Testimonial</a>
+                <a href="#contact" class="mobile-link hover:text-primary transition-colors">Contact</a>
+                <hr class="border-slate-800 my-2">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-phone-alt text-primary"></i>
+                    <a href="tel:+0123456789" class="font-bold text-white tracking-wide">+012 345 6789</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative min-h-[85vh] flex items-center justify-start bg-cover bg-center no-print" style="background-image: url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1920&q=80');">
+        <!-- Overlay background dark slate -->
+        <div class="absolute inset-0 hero-overlay"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 text-left w-full">
+            <div class="max-w-3xl">
+                <!-- Subtitle -->
+                <p class="text-primary font-heading font-bold text-sm sm:text-base tracking-widest uppercase mb-4 animate-bounce">
+                    Transport & Logistics Solution
+                </p>
+                <!-- Title matching layout -->
+                <h1 class="text-white font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-tight mb-6">
+                    #1 Place For Your <span class="text-primary">Shipment</span> Solutions
+                </h1>
+                <!-- Sub-description -->
+                <p class="text-slate-300 text-base sm:text-lg mb-8 max-w-2xl leading-relaxed">
+                    Ensure bulletproof tracking and ultra-precise freight transport with our signature cargo intelligence system. We deliver confidence across sea, land, and sky.
+                </p>
+                <!-- Double CTA buttons -->
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#tracker" class="px-8 py-4 primary-gradient hover:opacity-90 text-white font-heading font-bold rounded shadow-lg text-center tracking-wide uppercase transition-all transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-magnifying-glass mr-2"></i> Track Package
+                    </a>
+                    <a href="#quote" class="px-8 py-4 bg-accentBlue hover:opacity-90 text-white font-heading font-bold rounded shadow-lg text-center tracking-wide uppercase transition-all transform hover:-translate-y-0.5">
+                        Free Quote
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE SHIPMENT TRACKING HUB -->
+    <section id="tracker" class="py-16 bg-slate-950 text-white border-t border-b border-slate-900 scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+                
+                <!-- Background ambient design flare -->
+                <div class="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full filter blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10 border-b border-slate-800 pb-8 mb-8">
+                    <!-- Text Info -->
+                    <div class="max-w-md">
+                        <span class="bg-primary/15 text-primary border border-primary/30 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full inline-flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span> Live Global Telemetry
+                        </span>
+                        <h3 class="text-3xl font-heading font-extrabold text-white mt-4">Enterprise Shipment Tracking</h3>
+                        <p class="text-slate-400 text-sm mt-2 leading-relaxed">
+                            Search cargo databases for instant active route logs. Enter your unique tracking ID created on the server Operations portal.
+                        </p>
+                    </div>
+
+                    <!-- Input Fields -->
+                    <div class="flex-grow max-w-xl">
+                        <form onsubmit="handleLiveTrack(event)" class="relative flex flex-col sm:flex-row gap-3">
+                            <div class="relative flex-grow">
+                                <i class="fa-solid fa-box-open absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                                <input type="text" id="trackingIDInput" required placeholder="e.g. SH-12345" class="w-full bg-slate-950 border border-slate-800 rounded-lg pl-11 pr-4 py-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-mono tracking-wider text-white text-lg">
+                            </div>
+                            <button type="submit" class="px-8 py-4 bg-primary text-white font-heading font-bold uppercase tracking-wider rounded-lg hover:bg-rose-700 transition-colors flex items-center justify-center space-x-2 shrink-0">
+                                <i class="fa-solid fa-satellite-dish text-lg"></i>
+                                <span>Locate Freight</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Dynamic Live Tracker Output Panel -->
+                <div id="trackingOutputPanel" class="hidden relative z-10 transition-all duration-500 animate-fadeIn">
+                    
+                    <!-- Top Status Strip -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                        <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/60">
+                            <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest block">Active Waybill</span>
+                            <p id="trackWaybillID" class="text-lg font-mono font-bold text-white mt-1">-</p>
+                        </div>
+                        <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/60">
+                            <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest block">Service Level</span>
+                            <p id="trackService" class="text-lg font-heading font-semibold text-sky-400 mt-1">-</p>
+                        </div>
+                        <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/60 font-semibold">
+                            <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest block">Latest Checkpoint</span>
+                            <p id="trackLoc" class="text-lg text-slate-100 truncate mt-1">-</p>
+                        </div>
+                        <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/60">
+                            <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest block">Delivery Target</span>
+                            <p id="trackETA" class="text-lg font-heading font-bold text-primary mt-1">-</p>
+                        </div>
+                    </div>
+
+                    <!-- Visual Progress Nodes -->
+                    <div class="bg-slate-950/40 p-6 sm:p-8 rounded-2xl border border-slate-800/80 mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Transit Pipeline</span>
+                            <span id="trackStatusBadge" class="text-xs font-extrabold uppercase px-2.5 py-1 rounded"></span>
+                        </div>
+                        <div class="relative py-4">
+                            <!-- Horizontal Progress line connecting circles -->
+                            <div class="absolute top-[2.2rem] left-1/2 -translate-x-1/2 w-[85%] h-1 bg-slate-800 -z-0 hidden md:block" id="progressLineFill"></div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
+                                <!-- Step 1 -->
+                                <div class="text-center flex md:flex-col items-center gap-4 md:gap-0">
+                                    <div id="step1Circle" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 font-bold mb-2 transition-all">1</div>
+                                    <div class="text-left md:text-center">
+                                        <p class="font-heading font-bold text-sm text-white md:mt-1">Manifest Sent</p>
+                                        <p id="step1Time" class="text-[11px] text-slate-500">Ready</p>
+                                    </div>
+                                </div>
+                                <!-- Step 2 -->
+                                <div class="text-center flex md:flex-col items-center gap-4 md:gap-0">
+                                    <div id="step2Circle" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 font-bold mb-2 transition-all">2</div>
+                                    <div class="text-left md:text-center">
+                                        <p class="font-heading font-bold text-sm text-white md:mt-1">Freight Handover</p>
+                                        <p id="step2Time" class="text-[11px] text-slate-500">Pending</p>
+                                    </div>
+                                </div>
+                                <!-- Step 3 -->
+                                <div class="text-center flex md:flex-col items-center gap-4 md:gap-0">
+                                    <div id="step3Circle" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 font-bold mb-2 transition-all">3</div>
+                                    <div class="text-left md:text-center">
+                                        <p class="font-heading font-bold text-sm text-white md:mt-1">In Transit</p>
+                                        <p id="step3Time" class="text-[11px] text-slate-500">Pending</p>
+                                    </div>
+                                </div>
+                                <!-- Step 4 -->
+                                <div class="text-center flex md:flex-col items-center gap-4 md:gap-0">
+                                    <div id="step4Circle" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 font-bold mb-2 transition-all">4</div>
+                                    <div class="text-left md:text-center">
+                                        <p class="font-heading font-bold text-sm text-white md:mt-1">Out / Delivered</p>
+                                        <p id="step4Time" class="text-[11px] text-slate-500">Pending</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Split Panel -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                        <!-- Left Panel: Cargo Attributes & Telemetry Sensors -->
+                        <div class="lg:col-span-5 bg-slate-950/60 p-6 rounded-2xl border border-slate-800/80 space-y-6">
+                            <h4 class="font-heading font-extrabold text-base text-white border-b border-slate-800 pb-3"><i class="fa-solid fa-list-check text-primary mr-2"></i> Cargo Inventory & Telemetry</h4>
+                            
+                            <div class="space-y-4 text-sm">
+                                <div class="flex justify-between py-1 border-b border-slate-900">
+                                    <span class="text-slate-500">Shipper / Origin</span>
+                                    <span id="trackShipper" class="text-slate-200 font-semibold text-right max-w-[180px] truncate block">-</span>
+                                </div>
+                                <div class="flex justify-between py-1 border-b border-slate-900">
+                                    <span class="text-slate-500">Consignee / Destination</span>
+                                    <span id="trackReceiver" class="text-slate-200 font-semibold text-right max-w-[180px] truncate block">-</span>
+                                </div>
+                                <div class="flex justify-between py-1 border-b border-slate-900">
+                                    <span class="text-slate-500">Gross Payload Weight</span>
+                                    <span id="trackWeight" class="text-slate-200 font-semibold font-mono">-</span>
+                                </div>
+                                <div class="flex justify-between py-1 border-b border-slate-900">
+                                    <span class="text-slate-500">Dimensions (L×W×H)</span>
+                                    <span id="trackDimensions" class="text-slate-200 font-semibold font-mono">-</span>
+                                </div>
+                                <div class="flex justify-between py-1 border-b border-slate-900">
+                                    <span class="text-slate-500">Container Telemetry</span>
+                                    <span id="trackSensor" class="text-emerald-400 font-semibold flex items-center gap-1">
+                                        <i class="fa-solid fa-temperature-three-quarters animate-pulse"></i> -
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Styled Vector Barcode representation -->
+                            <div class="bg-white text-slate-950 p-4 rounded-xl text-center shadow-inner mt-4">
+                                <div id="trackBarcodeGraphic" class="font-mono text-2xl tracking-[0.25em] font-light select-none select-all">|||||| || | || |||| | | |||</div>
+                                <div class="text-[10px] text-slate-500 mt-2 font-mono tracking-wider uppercase font-semibold">Security Verification Barcode</div>
+                            </div>
+
+                            <!-- Action utilities -->
+                            <div class="pt-2 grid grid-cols-2 gap-3">
+                                <button onclick="triggerPODModal()" class="py-2.5 px-4 bg-slate-800 text-white hover:bg-slate-700 text-xs font-bold uppercase tracking-wider rounded transition-all flex items-center justify-center gap-1.5 shadow">
+                                    <i class="fa-solid fa-file-invoice-dollar text-primary"></i> Manifest Invoice
+                                </button>
+                                <button onclick="triggerLiveChat()" class="py-2.5 px-4 bg-primary text-white hover:bg-rose-700 text-xs font-bold uppercase tracking-wider rounded transition-all flex items-center justify-center gap-1.5 shadow">
+                                    <i class="fa-solid fa-headset"></i> Support Desk
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Right Panel: Chronological Scan Timeline Ledger -->
+                        <div class="lg:col-span-7 bg-slate-950/60 p-6 rounded-2xl border border-slate-800/80">
+                            <h4 class="font-heading font-extrabold text-base text-white border-b border-slate-800 pb-3 mb-6"><i class="fa-solid fa-timeline text-primary mr-2"></i> Route Log Ledger</h4>
+                            
+                            <!-- Ledger timeline container -->
+                            <div id="timelineLedgerContainer" class="relative pl-6 border-l border-slate-800 space-y-6">
+                                <!-- Dynamic items loaded in via JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPLORE SERVICES SECTION -->
+    <section id="services" class="py-20 lg:py-28 bg-lightBg no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header Text -->
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2">Our Services</p>
+                <h2 class="text-secondary font-heading font-extrabold text-3xl sm:text-4xl">Explore Our Services</h2>
+                <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
+            </div>
+
+            <!-- Service Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Air Freight -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
+                    <div class="relative overflow-hidden h-52">
+                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="Air Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Air+Freight'">
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-heading font-bold text-secondary mb-3 group-hover:text-primary transition-colors">Air Freight</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow leading-relaxed">
+                            Priority air transportation solutions utilizing scheduled flights and chartered cargo aircraft to guarantee rapid, time-critical delivery to global destinations.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ocean Freight -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
+                    <div class="relative overflow-hidden h-52">
+                        <img src="https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&w=600&q=80" alt="Ocean Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Ocean+Freight'">
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-heading font-bold text-secondary mb-3 group-hover:text-primary transition-colors">Ocean Freight</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow leading-relaxed">
+                            Cost-efficient ocean transportation for full container loads (FCL) and less-than-container loads (LCL), managed through strategic agreements with major global ocean carriers.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Road Freight -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
+                    <div class="relative overflow-hidden h-52">
+                        <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=600&q=80" alt="Road Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Road+Freight'">
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-heading font-bold text-secondary mb-3 group-hover:text-primary transition-colors">Road Freight</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow leading-relaxed">
+                            Flexible long-haul trucking and door-to-door distribution services across extensive domestic networks, using GPS-tracked, modern, and temperature-controlled fleets.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Train Freight -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
+                    <div class="relative overflow-hidden h-52">
+                        <img src="https://images.unsplash.com/photo-1515162305285-0293e4767cc2?auto=format&fit=crop&w=600&q=80" alt="Train Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Train+Freight'">
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-heading font-bold text-secondary mb-3 group-hover:text-primary transition-colors">Train Freight</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow leading-relaxed">
+                            Sustainable, high-capacity overland rail transit linking major industrial zones, providing an ideal balance between transit speed and shipping budget constraints.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customs Clearance -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
+                    <div class="relative overflow-hidden h-52">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" alt="Customs Clearance" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Customs+Clearance'">
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-heading font-bold text-secondary mb-3 group-hover:text-primary transition-colors">Customs Clearance</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow leading-relaxed">
+                            Streamlined brokerage and compliance services managed by certified agents to fast-track import and export customs processing at air hubs, land borders, and ocean ports.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Warehouse Solutions -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
+                    <div class="relative overflow-hidden h-52">
+                        <!-- High resolution, active warehouse fulfillment imagery -->
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Warehouse Solutions" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/800x600?text=Warehouse+Solutions'">
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-heading font-bold text-secondary mb-3 group-hover:text-primary transition-colors">Warehouse Solutions</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow leading-relaxed">
+                            State-of-the-art secure storage with digital manifest control, advanced stock tracking, thermal containment options, and express dispatch docks.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TWO-COLUMN ABOUT & TRUSTED LOGISTICS -->
+    <section id="about" class="py-20 lg:py-28 bg-white no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Column: Custom Delivery worker holding box -->
+                <div class="relative">
+                    <div class="relative z-10 rounded-lg overflow-hidden shadow-xl max-w-full lg:max-w-xl mx-auto">
+                        <img src="https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&w=800&q=80" alt="Quick Transport Solutions" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/800x600?text=Logistics+Delivery'">
+                    </div>
+                    <!-- Absolute Decorative Box behind image matching template styling -->
+                    <div class="absolute -bottom-6 -right-6 w-full h-full border-8 border-slate-100 rounded-lg -z-0 hidden md:block"></div>
+                </div>
+
+                <!-- Right Column: Text & Features -->
+                <div>
+                    <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2">About Us</p>
+                    <h2 class="text-secondary font-heading font-extrabold text-3xl sm:text-4xl mb-6">Quick Transport and Shipment Solutions</h2>
+                    <p class="text-slate-600 mb-8 leading-relaxed font-normal">
+                        At Shipment, we redefine international logistics through technology-driven transport networks, strict quality standards, and deep domain expertise. We build resilient supply chains that allow companies of all sizes to import, export, and scale globally with complete peace of mind.
+                    </p>
+
+                    <!-- Trust Cards inside About Section -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-slate-100 p-4 rounded-lg text-primary text-2xl">
+                                <i class="fa-solid fa-globe"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-base font-heading font-bold text-secondary mb-1">Global Coverage</h4>
+                                <p class="text-slate-500 text-xs leading-relaxed">Access over 180 countries through a deeply integrated multimodal partner network.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-slate-100 p-4 rounded-lg text-primary text-2xl">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-base font-heading font-bold text-secondary mb-1">On Time Delivery</h4>
+                                <p class="text-slate-500 text-xs leading-relaxed">Achieving a consistent 99.4% on-time arrival rate through modern route optimization engines.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <a href="#services" class="inline-block px-8 py-4 bg-primary text-white font-heading font-bold rounded shadow-md hover:bg-rose-700 tracking-wide uppercase transition-colors">
+                        Explore More
+                    </a>
+                </div>
+            </div>
+
+            <!-- TRUST PANEL -->
+            <div class="mt-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Side: Text and Trust details -->
+                <div class="order-2 lg:order-1">
+                    <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2">Our Features</p>
+                    <h3 class="text-secondary font-heading font-extrabold text-3xl mb-6">We Are Trusted Shipment Company Since 1990</h3>
+                    
+                    <div class="flex items-start space-x-4 mb-6">
+                        <div class="text-primary text-xl mt-1 col-span-1 shrink-0">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-heading font-bold text-secondary mb-1">Worldwide Service</h4>
+                            <p class="text-slate-500 text-sm leading-relaxed">Seamlessly connect continent-spanning supply chains with automated customs documentation filing, localized clearance protocols, and premium air-to-ocean transit handovers.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                        <div class="text-primary text-xl mt-1 col-span-1 shrink-0">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-heading font-bold text-secondary mb-1">Secure & Safe Packaging</h4>
+                            <p class="text-slate-500 text-sm leading-relaxed">Industrial-grade shockproof packaging, customized logistics containers, and temperature-controlled telemetry guards prevent transit anomalies for delicate inventory.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Workers photo grid -->
+                <div class="order-1 lg:order-2">
+                    <div class="relative overflow-hidden rounded-lg shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1521791136368-1a46827d0adf?auto=format&fit=crop&w=800&q=80" alt="Trusted Shipment Workers" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/800x600?text=Trusted+Warehouse'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS / FACTS SECTION -->
+    <section class="py-20 lg:py-24 bg-lightBg border-t border-slate-100 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left text side -->
+                <div>
+                    <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2">Some Facts</p>
+                    <h2 class="text-secondary font-heading font-extrabold text-3xl sm:text-4xl mb-6">#1 Place To Manage All Of Your Shipments</h2>
+                    <p class="text-slate-600 mb-8 leading-relaxed font-normal">
+                        We operate at the leading edge of modern transit engineering. From managing single-crate express courier dispatches to operating dedicated ocean-freight container networks, our centralized dashboard guarantees complete end-to-end transparency.
+                    </p>
+                    
+                    <div class="bg-primary/5 border border-primary/10 rounded-lg p-6 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 max-w-md">
+                        <div class="bg-primary text-white p-4 rounded-full text-xl shadow-md">
+                            <i class="fa-solid fa-phone-alt"></i>
+                        </div>
+                        <div class="text-center sm:text-left">
+                            <p class="text-xs text-slate-500 font-bold uppercase tracking-wider">Call for any query</p>
+                            <a href="tel:+0123456789" class="font-heading font-bold text-lg text-secondary hover:text-primary transition-colors">+012 345 6789</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right asymmetric stat grid matching reference layout precisely -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <!-- Stat 1: Happy Clients -->
+                    <div class="bg-primary text-white rounded-lg p-8 shadow-lg flex flex-col justify-between items-start relative overflow-hidden group">
+                        <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="10447">10,447+</span>
+                        <span class="text-sm font-semibold text-rose-100 uppercase tracking-wider">Happy Clients</span>
+                    </div>
+
+                    <!-- Stat 2: Customer Reviews -->
+                    <div class="bg-emerald-600 text-white rounded-lg p-8 shadow-lg flex flex-col justify-between items-start relative overflow-hidden group sm:translate-y-6">
+                        <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="1234">1,234</span>
+                        <span class="text-sm font-semibold text-emerald-100 uppercase tracking-wider">Customer Reviews</span>
+                    </div>
+
+                    <!-- Stat 3: Complete Shipments -->
+                    <div class="bg-sky-500 text-white rounded-lg p-8 shadow-lg flex flex-col justify-between items-start relative overflow-hidden group">
+                        <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-ship"></i>
+                        </div>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="20234+">20,234+</span>
+                        <span class="text-sm font-semibold text-sky-100 uppercase tracking-wider">Complete Shipments</span>
+                    </div>
+
+                    <!-- Stat 4: Expert Workers -->
+                    <div class="bg-slate-800 text-white rounded-lg p-8 shadow-lg flex flex-col justify-between items-start relative overflow-hidden group sm:translate-y-6">
+                        <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="998">998</span>
+                        <span class="text-sm font-semibold text-slate-300 uppercase tracking-wider">Expert Workers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REQUEST FREE QUOTE SECTION -->
+    <section id="quote" class="py-20 lg:py-28 bg-white no-print">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Centered Quote Form Panel -->
+            <div class="bg-slate-50 p-8 sm:p-10 rounded-xl shadow-lg border border-slate-100">
+                <div class="text-center mb-8">
+                    <span class="text-primary font-heading font-bold text-sm uppercase tracking-widest block mb-2">Get A Quote</span>
+                    <h2 class="text-secondary font-heading font-extrabold text-2xl sm:text-3xl">Request A Free Quote!</h2>
+                    <div class="w-12 h-1 bg-primary mx-auto mt-3 rounded"></div>
+                </div>
+                
+                <form id="quoteForm" onsubmit="handleQuoteSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="quoteName" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Your Name</label>
+                            <input type="text" id="quoteName" required placeholder="John Doe" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                        </div>
+                        <div>
+                            <label for="quoteEmail" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Your Email</label>
+                            <input type="email" id="quoteEmail" required placeholder="john@example.com" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="quotePhone" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Your Phone</label>
+                            <input type="tel" id="quotePhone" placeholder="+123 456 7890" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                        </div>
+                        <div>
+                            <label for="quoteService" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Select A Service</label>
+                            <select id="quoteService" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                                <option value="Air Freight">Air Freight</option>
+                                <option value="Ocean Freight">Ocean Freight</option>
+                                <option value="Road Freight">Road Freight</option>
+                                <option value="Train Freight">Train Freight</option>
+                                <option value="Warehouse Solutions">Warehouse Solutions</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="quoteMessage" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Special Note</label>
+                        <textarea id="quoteMessage" rows="4" placeholder="Describe your logistics needs..." class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-primary text-white font-heading font-bold rounded uppercase tracking-wider hover:bg-rose-700 shadow-md transition-all">
+                        Submit Request
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TESTIMONIAL CAROUSEL SECTION -->
+    <section id="testimonials" class="py-20 lg:py-28 bg-lightBg border-t border-slate-100 overflow-hidden no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header Text -->
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2">Testimonial</p>
+                <h2 class="text-secondary font-heading font-extrabold text-3xl sm:text-4xl">Our Clients Say!</h2>
+                <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
+            </div>
+
+            <!-- Interactive testimonial cards slider space -->
+            <div class="relative max-w-4xl mx-auto">
+                <div id="testimonialContainer" class="flex transition-transform duration-500 ease-in-out">
+                    <!-- Testimonial 1 -->
+                    <div class="w-full flex-shrink-0 px-4">
+                        <div class="bg-white rounded-xl p-8 sm:p-10 shadow-lg relative border border-slate-100">
+                            <!-- Quotation marks icon -->
+                            <div class="absolute top-6 right-8 text-slate-100 text-6xl pointer-events-none font-serif">“</div>
+                            
+                            <p class="text-slate-600 text-base italic leading-relaxed mb-6 font-normal">
+                                "Shipment has completely transformed our global distribution model. Their real-time telemetry tracking and automated customs brokerage saved us over 40 hours of administrative overhead in our first month. The transit timelines are incredibly precise."
+                            </p>
+                            <div class="flex items-center space-x-4">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Client 1" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.src='https://placehold.co/150x150?text=Client+1'">
+                                <div>
+                                    <h4 class="text-base font-heading font-bold text-secondary">Daniel Carter</h4>
+                                    <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold">Logistics Manager, TechCorp</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="w-full flex-shrink-0 px-4">
+                        <div class="bg-white rounded-xl p-8 sm:p-10 shadow-lg relative border border-slate-100">
+                            <div class="absolute top-6 right-8 text-slate-100 text-6xl pointer-events-none font-serif">“</div>
+                            
+                            <p class="text-slate-600 text-base italic leading-relaxed mb-6 font-normal">
+                                "Operating a complex, nationwide retail supply chain requires flawless timing. Shipment delivers consistent reliability across our road and rail operations. Their instant rate estimator makes logistics planning painless."
+                            </p>
+                            <div class="flex items-center space-x-4">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Client 2" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.src='https://placehold.co/150x150?text=Client+2'">
+                                <div>
+                                    <h4 class="text-base font-heading font-bold text-secondary">Sophia Bennett</h4>
+                                    <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold">Supply Chain Dir, PrimeGoods</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="w-full flex-shrink-0 px-4">
+                        <div class="bg-white rounded-xl p-8 sm:p-10 shadow-lg relative border border-slate-100">
+                            <div class="absolute top-6 right-8 text-slate-100 text-6xl pointer-events-none font-serif">“</div>
+                            
+                            <p class="text-slate-600 text-base italic leading-relaxed mb-6 font-normal">
+                                "During a critical sea-freight customs hold, Shipment's dedicated support agents intervened immediately to update declaration files. Their proactive service saved us thousands in potential port delays."
+                            </p>
+                            <div class="flex items-center space-x-4">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Client 3" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.src='https://placehold.co/150x150?text=Client+3'">
+                                <div>
+                                    <h4 class="text-base font-heading font-bold text-secondary">Ethan Vance</h4>
+                                    <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold">COO, GlobaRetail</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slider Indicators / Buttons -->
+                <div class="flex justify-center items-center space-x-3 mt-10">
+                    <button onclick="prevSlide()" class="w-10 h-10 rounded-full bg-white text-secondary shadow-md hover:bg-primary hover:text-white transition-colors border border-slate-100 flex items-center justify-center">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <!-- Dot indicators -->
+                    <div class="flex space-x-2">
+                        <button onclick="goToSlide(0)" class="slide-dot w-3 h-3 rounded-full bg-primary transition-colors duration-300"></button>
+                        <button onclick="goToSlide(1)" class="slide-dot w-3 h-3 rounded-full bg-slate-300 hover:bg-slate-400 transition-colors duration-300"></button>
+                        <button onclick="goToSlide(2)" class="slide-dot w-3 h-3 rounded-full bg-slate-300 hover:bg-slate-400 transition-colors duration-300"></button>
+                    </div>
+                    <button onclick="nextSlide()" class="w-10 h-10 rounded-full bg-white text-secondary shadow-md hover:bg-primary hover:text-white transition-colors border border-slate-100 flex items-center justify-center">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & GET IN TOUCH -->
+    <section id="contact" class="py-20 lg:py-28 bg-white no-print">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2">Get In Touch</p>
+            <h2 class="text-secondary font-heading font-extrabold text-3xl sm:text-4xl mb-6">Contact Us For Any Inquiry</h2>
+            <p class="text-slate-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+                Our experts are available 24/7 to solve your logistics, transport, tracking and freight management inquiries. Reach out to us via any channel or submit the request form.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Address Card -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center text-center">
+                    <div class="bg-primary/10 text-primary p-4 rounded-full mb-4"><i class="fa-solid fa-map-marker-alt text-xl"></i></div>
+                    <h4 class="font-heading font-bold text-secondary text-base">Office Address</h4>
+                    <p class="text-slate-500 text-sm mt-2 font-medium">123 Street, New York, USA</p>
+                </div>
+                <!-- Phone Card -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center text-center">
+                    <div class="bg-primary/10 text-primary p-4 rounded-full mb-4"><i class="fa-solid fa-phone-alt text-xl"></i></div>
+                    <h4 class="font-heading font-bold text-secondary text-base">Emergency Phone</h4>
+                    <p class="text-slate-500 text-sm mt-2 font-medium">+012 345 6789</p>
+                </div>
+                <!-- Email Card -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center text-center">
+                    <div class="bg-primary/10 text-primary p-4 rounded-full mb-4"><i class="fa-solid fa-envelope text-xl"></i></div>
+                    <h4 class="font-heading font-bold text-secondary text-base">Email Support</h4>
+                    <p class="text-slate-500 text-sm mt-2 font-medium">info@example.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer class="bg-slate-900 text-slate-300 pt-20 pb-10 border-t border-slate-800 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Address / Brand Column -->
+                <div>
+                    <h3 class="font-heading font-extrabold text-2xl text-white mb-6">
+                        <i class="fa-solid fa-box-open mr-2 text-primary"></i>Shipment
+                    </h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Providing premier, certified transport, global cargo shipping, and warehouse fulfillment across 180 countries since 1990.
+                    </p>
+                    <div class="space-y-3 text-sm">
+                        <p class="flex items-center"><i class="fa-solid fa-map-marker-alt text-primary mr-3 text-base"></i> 123 Street, New York, USA</p>
+                        <p class="flex items-center"><i class="fa-solid fa-phone-alt text-primary mr-3 text-base"></i> +012 345 6789</p>
+                        <p class="flex items-center"><i class="fa-solid fa-envelope text-primary mr-3 text-base"></i> info@example.com</p>
+                    </div>
+                </div>
+
+                <!-- Services Column -->
+                <div>
+                    <h4 class="font-heading font-bold text-lg text-white mb-6 border-l-4 border-primary pl-3">Services</h4>
+                    <ul class="space-y-3 text-sm font-semibold uppercase tracking-wide">
+                        <li><a href="#services" class="hover:text-primary transition-colors flex items-center"><i class="fa-solid fa-angle-right text-xs mr-2 text-primary"></i> Air Freight</a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors flex items-center"><i class="fa-solid fa-angle-right text-xs mr-2 text-primary"></i> Ocean Freight</a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors flex items-center"><i class="fa-solid fa-angle-right text-xs mr-2 text-primary"></i> Road Freight</a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors flex items-center"><i class="fa-solid fa-angle-right text-xs mr-2 text-primary"></i> Train Freight</a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors flex items-center"><i class="fa-solid fa-angle-right text-xs mr-2 text-primary"></i> Warehouse Solutions</a></li>
+                    </ul>
+                </div>
+
+                <!-- Quick Links Column -->
+                <div>
+                    <h4 class="font-heading font-bold text-lg text-white mb-6 border-l-4 border-primary pl-3">Quick Links</h4>
+                    <ul class="space-y-3 text-sm font-semibold uppercase tracking-wide">
+                        <li><a href="#about" class="hover:text-primary transition-colors flex items-center"><i class="fa-solid fa-angle-right text-xs mr-2 text-primary"></i> About Us</a></li>
+                        <li><a href="#contact" class="hover:text-primary transition-colors flex items-center"><i class="fa-solid fa-angle-right text-xs mr-2 text-primary"></i> Contact Us</a></li>
+                        <li><a href="#testimonials" class="hover:text-primary transition-colors flex items-center"><i class="fa-solid fa-angle-right text-xs mr-2 text-primary"></i> Reviews</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter Column -->
+                <div>
+                    <h4 class="font-heading font-bold text-lg text-white mb-6 border-l-4 border-primary pl-3">Newsletter</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Stay updated on global shipping trends, customs policy changes, and logistics solutions.
+                    </p>
+                    <form onsubmit="handleNewsletterSubmit(event)" class="space-y-3">
+                        <div class="relative">
+                            <input type="email" id="newsEmail" required placeholder="Your Email" class="w-full bg-slate-800 text-white rounded px-4 py-3 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent transition-all">
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-primary hover:bg-rose-700 text-white font-heading font-bold uppercase tracking-wider text-sm rounded shadow transition-colors">
+                            SignUp
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Border Line -->
+            <div class="border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
+                <p>&copy; <span id="currentYear"></span> Shipment. All Rights Reserved.</p>
+                <p class="mt-2 sm:mt-0">Designed by <a href="#" class="text-slate-400 hover:text-primary transition-colors">HTML Codex</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE NOTIFICATION / RESPONSE MODAL -->
+    <div id="statusModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden no-print">
+        <div class="bg-white rounded-lg p-6 sm:p-8 max-w-md w-full shadow-2xl text-center transform scale-95 opacity-0 transition-all duration-300" id="modalCard">
+            <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-3xl mx-auto mb-4" id="modalIcon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 class="font-heading font-extrabold text-xl text-secondary mb-2" id="modalTitle">Request Submitted!</h3>
+            <p class="text-slate-500 text-sm mb-6 leading-relaxed" id="modalMessage">
+                Thank you. We have received your parameters and will respond within 15 minutes with your custom quote.
+            </p>
+            <button onclick="closeStatusModal()" class="w-full py-3 bg-secondary hover:bg-slate-800 text-white font-heading font-bold rounded uppercase tracking-wider transition-all">
+                Close Window
+            </button>
+        </div>
+    </div>
+
+    <!-- ENTERPRISE PROOF OF DELIVERY / MANIFEST MODAL -->
+    <div id="manifestModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm hidden">
+        <div class="bg-white text-slate-900 rounded-2xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6 no-print">
+                <h3 class="font-heading font-extrabold text-lg text-secondary">
+                    <i class="fa-solid fa-file-invoice text-primary mr-2"></i> Cargo Manifest Bill of Lading
+                </h3>
+                <button onclick="closeManifestModal()" class="text-slate-400 hover:text-slate-900 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Printed content sheet -->
+            <div id="manifestPrintArea" class="bg-slate-50 p-6 sm:p-8 rounded-xl border border-slate-200 font-sans text-xs text-slate-800 leading-relaxed">
+                <!-- Inner Invoice Header -->
+                <div class="flex justify-between items-start border-b border-slate-300 pb-4 mb-6">
+                    <div>
+                        <h2 class="text-xl font-heading font-extrabold text-slate-950 uppercase tracking-wider">Shipment Logistics</h2>
+                        <p class="text-[10px] text-slate-500 font-semibold uppercase mt-1">Waybill Declaration & Safety Bill</p>
+                        <p class="text-[10px] text-slate-400 mt-1">123 Logistics Plaza, NY, USA</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="bg-primary/10 text-primary px-3 py-1.5 rounded font-extrabold uppercase text-[9px] tracking-wider" id="manifestStatusTag">IN TRANSIT</span>
+                        <p class="text-[10px] text-slate-500 mt-3 font-mono">Date Generated: May 26, 2026</p>
+                    </div>
+                </div>
+
+                <!-- Logistics Grid -->
+                <div class="grid grid-cols-2 gap-6 mb-6 text-[11px]">
+                    <div>
+                        <h4 class="font-extrabold text-slate-950 uppercase text-[9px] tracking-wider text-slate-400 mb-1">Shipper Origin</h4>
+                        <p id="manShipper" class="font-semibold text-slate-800">-</p>
+                        <p class="text-slate-400 mt-0.5">Approved Logistics Facility Node</p>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-slate-950 uppercase text-[9px] tracking-wider text-slate-400 mb-1">Consignee Destination</h4>
+                        <p id="manReceiver" class="font-semibold text-slate-800">-</p>
+                        <p class="text-slate-400 mt-0.5">Secure Final Delivery Destination</p>
+                    </div>
+                </div>
+
+                <!-- Specs table -->
+                <table class="w-full border-collapse border border-slate-300 text-left mb-6">
+                    <thead>
+                        <tr class="bg-slate-200 text-slate-700 uppercase text-[9px] tracking-wider">
+                            <th class="border border-slate-300 p-2">Tracking ID</th>
+                            <th class="border border-slate-300 p-2">Cargo Service Class</th>
+                            <th class="border border-slate-300 p-2">Net Weight</th>
+                            <th class="border border-slate-300 p-2">Dimensions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="font-mono text-slate-900 bg-white">
+                            <td id="manID" class="border border-slate-300 p-2 font-bold text-primary">-</td>
+                            <td id="manService" class="border border-slate-300 p-2 font-sans">-</td>
+                            <td id="manWeight" class="border border-slate-300 p-2">-</td>
+                            <td id="manDimensions" class="border border-slate-300 p-2">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="border-t border-slate-300 pt-4 flex justify-between items-center">
+                    <div>
+                        <p class="text-[9px] text-slate-400 font-mono tracking-wider uppercase font-bold mb-1">Digital Manifest Key</p>
+                        <div id="manBarcode" class="font-mono text-lg tracking-[0.1em] text-slate-900 font-light select-none">|||| || ||| | |||</div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[10px] font-bold text-slate-800">Shipment Intelligence Systems Inc.</p>
+                        <p class="text-[9px] text-slate-400 mt-0.5">Signature Verified Electronically</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal CTA triggers -->
+            <div class="mt-6 flex gap-3 justify-end no-print">
+                <button onclick="closeManifestModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider rounded transition-colors">
+                    Close Sheet
+                </button>
+                <button onclick="printManifest()" class="px-5 py-2.5 bg-primary hover:bg-rose-700 text-white text-xs font-bold uppercase tracking-wider rounded transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Print Document
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Track Mobile Menu Drawer status
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileDrawer.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileDrawer.classList.contains('hidden')) {
+                icon.className = 'fa-solid fa-bars';
+            } else {
+                icon.className = 'fa-solid fa-xmark';
+            }
+        });
+
+        // Close mobile menu when user clicks a drawer link
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileDrawer.classList.add('hidden');
+                mobileMenuBtn.querySelector('i').className = 'fa-solid fa-bars';
+            });
+        });
+
+        // Testimonial Carousel logic
+        let currentSlideIndex = 0;
+        const totalSlides = 3;
+        const container = document.getElementById('testimonialContainer');
+        const dots = document.querySelectorAll('.slide-dot');
+
+        function updateSlider() {
+            container.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+            dots.forEach((dot, index) => {
+                if (index === currentSlideIndex) {
+                    dot.className = 'slide-dot w-3 h-3 rounded-full bg-primary transition-colors duration-300';
+                } else {
+                    dot.className = 'slide-dot w-3 h-3 rounded-full bg-slate-300 hover:bg-slate-400 transition-colors duration-300';
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+            updateSlider();
+        }
+
+        // Auto slide every 8 seconds
+        setInterval(nextSlide, 8000);
+
+        // Stats counter animation logic
+        const counters = document.querySelectorAll('.count-up');
+        const options = {
+            threshold: 0.5,
+            rootMargin: "0px"
+        };
+
+        const countObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    let count = 0;
+                    const speed = target / 80; // duration control
+
+                    const updateCount = () => {
+                        if (count < target) {
+                            count = Math.min(target, Math.ceil(count + speed));
+                            counter.innerText = count.toLocaleString();
+                            setTimeout(updateCount, 15);
+                        } else {
+                            counter.innerText = target.toLocaleString();
+                        }
+                    };
+
+                    updateCount();
+                    observer.unobserve(counter);
+                }
+            });
+        }, options);
+
+        counters.forEach(counter => countObserver.observe(counter));
+
+        // Year updater
+        document.getElementById('currentYear').innerText = new Date().getFullYear();
+
+        // Modal triggers
+        const statusModal = document.getElementById('statusModal');
+        const modalCard = document.getElementById('modalCard');
+
+        // Main status alerts
+        function openStatusModal(title, msg, isSuccess = true) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMessage').innerText = msg;
+            
+            const icon = document.getElementById('modalIcon');
+            if (isSuccess) {
+                icon.className = "w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-3xl mx-auto mb-4";
+                icon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            } else {
+                icon.className = "w-16 h-16 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-3xl mx-auto mb-4";
+                icon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+            }
+
+            statusModal.classList.remove('hidden');
+            setTimeout(() => {
+                modalCard.classList.remove('scale-95', 'opacity-0');
+                modalCard.classList.add('scale-100', 'opacity-100');
+            }, 50);
+        }
+
+        function closeStatusModal() {
+            modalCard.classList.remove('scale-100', 'opacity-100');
+            modalCard.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                statusModal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Form handlers
+        function handleQuoteSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('quoteName').value;
+            const email = document.getElementById('quoteEmail').value;
+            const service = document.getElementById('quoteService').value;
+
+            openStatusModal(
+                "Quote Request Received!",
+                `Thank you ${name}. Our logistics expert team has received your inquiry for "${service}" service. We will review the parameters and email you back at ${email} shortly.`
+            );
+            document.getElementById('quoteForm').reset();
+        }
+
+        // Newsletter Handler
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsEmail').value;
+            openStatusModal(
+                "Subscribed Successfully!",
+                `You have successfully subscribed to the Shipment newsletter. Global cargo insights and transport updates will be delivered periodically to ${email}.`
+            );
+            document.getElementById('newsEmail').value = "";
+        }
+
+        // Live API call tracking database resolver
+        async function handleLiveTrack(e) {
+            if (e) e.preventDefault();
+            const query = document.getElementById('trackingIDInput').value.trim().toUpperCase();
+            const outputPanel = document.getElementById('trackingOutputPanel');
+
+            let result = null;
+
+            try {
+                // Request shipment metadata from the external live Node.js Express server
+                const response = await fetch(`https://shipp-backend.onrender.com/api/shipments/${query}`);
+                if (response.ok) {
+                    result = await response.json();
+                } else {
+                    console.warn(`Live server returned non-OK status code: ${response.status}`);
+                }
+            } catch (err) {
+                console.warn('API database connection failed:', err);
+            }
+
+            // If the shipment is not found on your Node.js backend server, cleanly raise an unregistered alert
+            if (!result) {
+                outputPanel.classList.add('hidden');
+                openStatusModal(
+                    "Shipment ID Unregistered", 
+                    `The Waybill Code "${query}" could not be recognized on our active database records. Please verify your tracking ID with your dispatch hub manager.`, 
+                    false
+                );
+                return;
+            }
+
+            // Cache global current track object to use inside modal invoices
+            window.currentTrackedCargo = result;
+            window.currentTrackedCargoID = query;
+
+            // Fill text fields
+            document.getElementById('trackWaybillID').innerText = result.waybill;
+            document.getElementById('trackService').innerText = result.service;
+            document.getElementById('trackETA').innerText = result.eta;
+            document.getElementById('trackLoc').innerText = result.location;
+            
+            // Sidebar fields
+            document.getElementById('trackShipper').innerText = result.shipper;
+            document.getElementById('trackReceiver').innerText = result.receiver;
+            document.getElementById('trackWeight').innerText = result.weight;
+            document.getElementById('trackDimensions').innerText = result.dimensions;
+            document.getElementById('trackSensor').innerHTML = `<i class="fa-solid fa-temperature-three-quarters animate-pulse"></i> ${result.tempSensor}`;
+            document.getElementById('trackBarcodeGraphic').innerText = result.barcode;
+
+            const badge = document.getElementById('trackStatusBadge');
+            badge.innerText = result.status;
+            badge.className = `text-xs font-extrabold uppercase px-2.5 py-1 rounded ${result.badgeClass}`;
+
+            // Handle progress stepper visual styling updates
+            for (let i = 1; i <= 4; i++) {
+                const circle = document.getElementById(`step${i}Circle`);
+                const timeLabel = document.getElementById(`step${i}Time`);
+                timeLabel.innerText = result.times[i-1];
+
+                if (i <= result.step) {
+                    // Completed step style matching theme coral red
+                    circle.className = "w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-2 shadow-lg scale-110 transition-all duration-300 relative z-10";
+                    circle.innerHTML = '<i class="fa-solid fa-check text-xs"></i>';
+                } else {
+                    // Pending step style
+                    circle.className = "w-10 h-10 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center font-bold mb-2 transition-all duration-300 relative z-10";
+                    circle.innerText = i;
+                }
+            }
+
+            // Animate connector line progress
+            const progressLine = document.getElementById('progressLineFill');
+            if (result.step === 1) progressLine.style.background = 'linear-gradient(to right, #FF3E41 0%, #1e293b 20%)';
+            else if (result.step === 2) progressLine.style.background = 'linear-gradient(to right, #FF3E41 40%, #1e293b 50%)';
+            else if (result.step === 3) progressLine.style.background = 'linear-gradient(to right, #FF3E41 70%, #1e293b 80%)';
+            else if (result.step === 4) progressLine.style.background = '#FF3E41';
+
+            // Build Route Log Ledger list dynamically
+            const timelineContainer = document.getElementById('timelineLedgerContainer');
+            timelineContainer.innerHTML = ''; // Clear previous
+
+            result.timeline.forEach((event, idx) => {
+                const isActive = idx === 0;
+                const itemHTML = `
+                    <div class="relative pl-6 animate-fadeIn">
+                        <!-- Left indicator circle dot -->
+                        <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-2 ${isActive ? 'bg-primary border-primary animate-pulse' : 'bg-slate-900 border-slate-700'} flex items-center justify-center">
+                            <div class="w-1.5 h-1.5 rounded-full ${isActive ? 'bg-white' : 'bg-slate-700'}"></div>
+                        </div>
+                        
+                        <!-- Event info body card -->
+                        <div class="bg-slate-950/40 border ${isActive ? 'border-primary/30 bg-primary/5' : 'border-slate-800/60'} p-4 rounded-xl">
+                            <div class="flex flex-wrap justify-between items-center gap-2 mb-2">
+                                <span class="text-xs font-bold text-slate-400"><i class="fa-solid fa-calendar-day mr-1"></i> ${event.time}</span>
+                                <span class="bg-slate-900 text-slate-300 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-slate-800">${event.loc}</span>
+                            </div>
+                            <h5 class="font-heading font-extrabold text-sm text-white flex items-center gap-2">
+                                <i class="fa-solid ${event.icon} text-xs text-primary"></i> ${event.event}
+                            </h5>
+                            <p class="text-xs text-slate-400 mt-2 leading-relaxed">${event.desc}</p>
+                        </div>
+                    </div>
+                `;
+                timelineContainer.insertAdjacentHTML('beforeend', itemHTML);
+            });
+
+            // Make container visible
+            outputPanel.classList.remove('hidden');
+            outputPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        /* ACTIONS: MANIFEST / PRINT DOCUMENT UTILITIES */
+        const manifestModal = document.getElementById('manifestModal');
+
+        function triggerPODModal() {
+            const data = window.currentTrackedCargo;
+            const query = window.currentTrackedCargoID;
+            if(!data) return;
+
+            // Fill Manifest Modal sheet details
+            document.getElementById('manShipper').innerText = data.shipper;
+            document.getElementById('manReceiver').innerText = data.receiver;
+            document.getElementById('manID').innerText = query;
+            document.getElementById('manService').innerText = data.service;
+            document.getElementById('manWeight').innerText = data.weight;
+            document.getElementById('manDimensions').innerText = data.dimensions;
+            document.getElementById('manBarcode').innerText = data.barcode;
+            document.getElementById('manifestStatusTag').innerText = data.status;
+
+            // Open manifest modal window
+            manifestModal.classList.remove('hidden');
+        }
+
+        function closeManifestModal() {
+            manifestModal.classList.add('hidden');
+        }
+
+        function printManifest() {
+            // Trigger standard print layout on manifest print section
+            const printContents = document.getElementById('manifestPrintArea').innerHTML;
+            const originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = `
+                <div style="background: white; color: black; padding: 40px; font-family: sans-serif;">
+                    ${printContents}
+                </div>
+            `;
+            window.print();
+            document.body.innerHTML = originalContents;
+            // Rebind listeners quickly
+            window.location.reload();
+        }
+
+        function triggerLiveChat() {
+            const data = window.currentTrackedCargo;
+            openStatusModal(
+                "Connecting Support Agent...",
+                `Opening prioritized chat bridge regarding cargo ${window.currentTrackedCargoID || 'SH-99210'}. A freight consultant is reviewing your custom logistics file.`
+            );
+        }
+    </script>
+</body>
+</html>
