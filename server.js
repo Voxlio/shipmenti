@@ -25,6 +25,9 @@ const DB_FILE = path.join(__dirname, 'database.json');
 app.use(cors()); // Permits any frontend website to access tracking data securely
 app.use(express.json()); // Parses incoming JSON data payloads
 
+// 🛠️ Paste this new line right here:
+app.use(express.static(path.join(__dirname, 'public')));
+
 // ==========================================
 // PERSISTENT DATABASE MANAGEMENT
 // ==========================================
