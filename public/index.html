@@ -893,7 +893,7 @@
                     </div>
                     <div class="text-right">
                         <span class="bg-primary/10 text-primary px-3 py-1.5 rounded font-extrabold uppercase text-[9px] tracking-wider" id="manifestStatusTag">IN TRANSIT</span>
-                        <p class="text-[10px] text-slate-500 mt-3 font-mono">Date Generated: May 26, 2026</p>
+                        <p class="text-[10px] text-slate-500 mt-3 font-mono">Date Generated: <span id="manifestDate">May 26, 2026</span></p>
                     </div>
                 </div>
 
@@ -1216,6 +1216,11 @@
             const data = window.currentTrackedCargo;
             const query = window.currentTrackedCargoID;
             if(!data) return;
+
+            // Dynamically generate the current date when clicked
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const today = new Date().toLocaleDateString('en-US', options);
+            document.getElementById('manifestDate').innerText = today;
 
             // Fill Manifest Modal sheet details
             document.getElementById('manShipper').innerText = data.shipper;
