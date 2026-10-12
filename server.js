@@ -1,14 +1,18 @@
 /**
  * CargoTracker Express / Shipment - Logistics & Tracking Backend Server
- * Technology Stack: Node.js, Express, Filesystem JSON Database, CORS.
+ * Technology Stack: Node.js, Express, Firestore Database, CORS.
  * * Instructions to run on your computer:
  * 1. Install Node.js on your computer (from nodejs.org).
  * 2. Create a folder and save this code as "server.js".
  * 3. Open your terminal/command prompt in that folder and run:
- * npm install express cors
- * 4. Start the server with:
+ * npm install express cors firebase-admin
+ * 4. Set environment variables:
+ *    FIREBASE_SERVICE_ACCOUNT - Full service account JSON as string
+ *    APP_TIMEZONE - Timezone for date formatting (default: UTC)
+ *    ALLOWED_ORIGIN - CORS origin for production frontend
+ * 5. Start the server with:
  * node server.js
- * 5. Open your browser and navigate to:
+ * 6. Open your browser and navigate to:
  * http://localhost:3000/admin  (For the Staff Operations Portal)
  */
 
@@ -16,61 +20,87 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
+const admin = require('firebase-admin');
+const { getFirestore } = require('firebase-admin/firestore');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const DB_FILE = path.join(__dirname, 'database.json');
 
+// Initialize Firestore
+let db;
+try {
+  // Check if default app already exists
+  admin.app();
+} catch {
+  // App doesn't exist, initialize it
+  try {
+    const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT;
+    if (serviceAccount) {
+      let parsedAccount;
+      try {
+        parsedAccount = JSON.parse(serviceAccount);
+        // Fix private_key newline characters if they are escaped
+        if (parsedAccount.private_key && parsedAccount.private_key.includes('\\n')) {
+          parsedAccount.private_key = parsedAccount.private_key.replace(/\\n/g, '\n');
+        }
+        admin.initializeApp({
+          credential: admin.credential.cert(parsedAccount)
+        });
+      } catch (parseError) {
+        console.error('Failed to parse FIREBASE_SERVICE_ACCOUNT:', parseError);
+        // Fallback to application default credentials (for local development)
+        admin.initializeApp();
+      }
+    } else {
+      // Fallback to application default credentials (for local development)
+      admin.initializeApp();
+    }
+  } catch (error) {
+    console.error('Firebase initialization error:', error);
+    // Fallback to application default credentials
+    admin.initializeApp();
+  }
+}
+db = getFirestore();
+
+// CORS configuration
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || '*';
+const corsOptions = {
+  origin: ALLOWED_ORIGIN,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+app.use(cors(corsOptions));
+// The cors middleware automatically handles preflight OPTIONS requests
+// app.options('*', cors(corsOptions)); // Removed for Express 5 compatibility
+
 // Middleware
-app.use(cors()); // Permits any frontend website to access tracking data securely
 app.use(express.json()); // Parses incoming JSON data payloads
 
 // 🛠️ Paste this new line right here:
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ==========================================
-// PERSISTENT DATABASE MANAGEMENT
+// DATABASE MANAGEMENT (Firestore)
 // ==========================================
 
 // Prepopulated logistics records cleared as requested
 const INITIAL_DATABASE = {};
 
-// Utility to read JSON database
-function readDatabase() {
-    try {
-        if (!fs.existsSync(DB_FILE)) {
-            fs.writeFileSync(DB_FILE, JSON.stringify(INITIAL_DATABASE, null, 4));
-            return INITIAL_DATABASE;
-        }
-        const data = fs.readFileSync(DB_FILE, 'utf8');
-        return JSON.parse(data);
-    } catch (error) {
-        console.error("Database reading failure, recovering initial backup:", error);
-        return INITIAL_DATABASE;
-    }
-}
-
-// Utility to write JSON database
-function saveDatabase(dbData) {
-    try {
-        fs.writeFileSync(DB_FILE, JSON.stringify(dbData, null, 4), 'utf8');
-    } catch (error) {
-        console.error("Critical: Failed to save tracking records to system:", error);
-    }
-}
-
 // Utility to format server-side dates when custom UI dates are not provided
-function formatBackendDateTime(dateObj, longFormat = true) {
+function formatBackendDateTime(dateObj, longFormat = true, timeZone = process.env.APP_TIMEZONE || 'UTC') {
     if (!dateObj) return null;
     const d = new Date(dateObj);
     if (isNaN(d.getTime())) return null;
     
-    const month = d.toLocaleDateString('en-US', { month: 'short' });
-    const day = d.toLocaleDateString('en-US', { day: '2-digit' });
-    const year = d.getFullYear();
+    const month = d.toLocaleDateString('en-US', { month: 'short', timeZone });
+    const day = d.toLocaleDateString('en-US', { day: '2-digit', timeZone });
+    const year = d.toLocaleDateString('en-US', { year: 'numeric', timeZone });
     
-    let hours = d.getHours();
-    const minutes = String(d.getMinutes()).padStart(2, '0');
+    let hours = parseInt(d.toLocaleTimeString('en-US', { hour: '2-digit', hour12: false, timeZone }), 10);
+    const minutes = d.toLocaleTimeString('en-US', { minute: '2-digit', timeZone });
     const ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
     hours = hours ? hours : 12; 
@@ -82,9 +112,6 @@ function formatBackendDateTime(dateObj, longFormat = true) {
         return `${month} ${day}, ${timeStr}`;
     }
 }
-
-// Initialize on server boot
-readDatabase();
 
 // ==========================================
 // REST API ROUTING ENDPOINTS
@@ -105,26 +132,39 @@ app.post('/api/auth/login', (req, res) => {
 });
 
 // Fetch all registered cargo containers
-app.get('/api/shipments', (req, res) => {
-    const database = readDatabase();
-    res.status(200).json(database);
+app.get('/api/shipments', async (req, res) => {
+    try {
+        const snapshot = await db.collection('shipments').get();
+        const database = {};
+        snapshot.forEach(doc => {
+            database[doc.id] = doc.data();
+        });
+        res.status(200).json(database);
+    } catch (error) {
+        console.error('Error fetching shipments:', error);
+        res.status(500).json({ error: 'Failed to fetch shipments' });
+    }
 });
 
 // Search for single parcel tracking ID (GET /api/shipments/SH-99210)
-app.get('/api/shipments/:id', (req, res) => {
-    const database = readDatabase();
-    const cargoId = req.params.id.trim().toUpperCase();
-    const record = database[cargoId];
-
-    if (record) {
-        res.status(200).json(record);
-    } else {
-        res.status(404).json({ error: "Tracking identifier not recognized in active database manifests." });
+app.get('/api/shipments/:id', async (req, res) => {
+    try {
+        const cargoId = req.params.id.trim().toUpperCase();
+        const doc = await db.collection('shipments').doc(cargoId).get();
+        
+        if (doc.exists) {
+            res.status(200).json(doc.data());
+        } else {
+            res.status(404).json({ error: "Tracking identifier not recognized in active database manifests." });
+        }
+    } catch (error) {
+        console.error('Error fetching shipment:', error);
+        res.status(500).json({ error: 'Failed to fetch shipment' });
     }
 });
 
 // Register and Generate brand new waybill
-app.post('/api/shipments/create', (req, res) => {
+app.post('/api/shipments/create', async (req, res) => {
     const { 
         shipper, receiver, service, status, weight, dimensions, temp, m1, m2, m3, m4,
         initiatedDate, initiatedDateShort,
@@ -140,227 +180,268 @@ app.post('/api/shipments/create', (req, res) => {
     // 1. Math formula generating a cryptographically independent 5-digit index
     const min = 10000;
     const max = 99999;
-    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-    const generatedID = "SH-" + randomNumber;
+    let generatedID;
+    let newPackage;
+    let maxRetries = 10;
+    
+    while (maxRetries > 0) {
+        const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+        generatedID = "SH-" + randomNumber;
+        
+        // 2. Select appropriate badge design styles matching cargo states
+        let badgeClass = "bg-sky-500/10 text-sky-500 border border-sky-500/30";
+        let step = 1;
 
-    // 2. Select appropriate badge design styles matching cargo states
-    let badgeClass = "bg-sky-500/10 text-sky-500 border border-sky-500/30";
-    let step = 1;
+        if (status === 'In Transit') {
+            badgeClass = "bg-amber-500/10 text-amber-500 border border-amber-500/30";
+            step = 3;
+        } else if (status === 'Delivered') {
+            badgeClass = "bg-emerald-500/10 text-[#22C55E] border border-emerald-500/30";
+            step = 4;
+        } else if (status === 'Customs Exception') {
+            badgeClass = "bg-rose-500/10 text-rose-500 border border-rose-500/30";
+            step = 2;
+        }
 
-    if (status === 'In Transit') {
-        badgeClass = "bg-amber-500/10 text-amber-500 border border-amber-500/30";
-        step = 3;
-    } else if (status === 'Delivered') {
-        badgeClass = "bg-emerald-500/10 text-[#22C55E] border border-emerald-500/30";
-        step = 4;
-    } else if (status === 'Customs Exception') {
-        badgeClass = "bg-rose-500/10 text-rose-500 border border-rose-500/30";
-        step = 2;
-    }
+        // Generate chronological fallbacks in case custom form values are empty
+        const now = new Date();
+        const fallbackInitiated = formatBackendDateTime(now, true);
+        const fallbackInitiatedShort = formatBackendDateTime(now, false);
 
-    // Generate chronological fallbacks in case custom form values are empty
-    const now = new Date();
-    const fallbackInitiated = formatBackendDateTime(now, true);
-    const fallbackInitiatedShort = formatBackendDateTime(now, false);
+        const sortedTime = new Date(now.getTime() + 4 * 60 * 60 * 1000); // + 4 hours
+        const fallbackDeparted = formatBackendDateTime(sortedTime, true);
+        const fallbackDepartedShort = formatBackendDateTime(sortedTime, false);
 
-    const sortedTime = new Date(now.getTime() + 4 * 60 * 60 * 1000); // + 4 hours
-    const fallbackDeparted = formatBackendDateTime(sortedTime, true);
-    const fallbackDepartedShort = formatBackendDateTime(sortedTime, false);
+        const transitTime = new Date(now.getTime() + 12 * 60 * 60 * 1000); // + 12 hours
+        const fallbackOnTransit = formatBackendDateTime(transitTime, true);
+        const fallbackOnTransitShort = formatBackendDateTime(transitTime, false);
 
-    const transitTime = new Date(now.getTime() + 12 * 60 * 60 * 1000); // + 12 hours
-    const fallbackOnTransit = formatBackendDateTime(transitTime, true);
-    const fallbackOnTransitShort = formatBackendDateTime(transitTime, false);
+        const deliveryTime = new Date(now.getTime() + 24 * 60 * 60 * 1000); // + 24 hours
+        const fallbackDelivered = formatBackendDateTime(deliveryTime, true);
+        const fallbackDeliveredShort = formatBackendDateTime(deliveryTime, false);
 
-    const deliveryTime = new Date(now.getTime() + 24 * 60 * 60 * 1000); // + 24 hours
-    const fallbackDelivered = formatBackendDateTime(deliveryTime, true);
-    const fallbackDeliveredShort = formatBackendDateTime(deliveryTime, false);
+        const finalInitiatedShort = initiatedDateShort || fallbackInitiatedShort;
+        const finalDepartedShort = departedDateShort || fallbackDepartedShort;
+        const finalOnTransitShort = onTransitDateShort || fallbackOnTransitShort;
+        const finalDeliveredShort = deliveredDateShort || fallbackDeliveredShort;
 
-    const finalInitiatedShort = initiatedDateShort || fallbackInitiatedShort;
-    const finalDepartedShort = departedDateShort || fallbackDepartedShort;
-    const finalOnTransitShort = onTransitDateShort || fallbackOnTransitShort;
-    const finalDeliveredShort = deliveredDateShort || fallbackDeliveredShort;
-
-    // 3. Formulate ETA directly matching the custom delivery date
-    let etaValue = "Awaiting Processing";
-    if (status === 'Delivered') {
-        etaValue = `Delivered successfully (${finalDeliveredShort})`;
-    } else if (status === 'Customs Exception') {
-        etaValue = "Hold (Awaiting Customs)";
-    } else if (status === 'In Transit') {
-        etaValue = `Scheduled Delivery: ${finalDeliveredShort}`;
-    } else {
-        etaValue = `ETA: ${finalDeliveredShort}`;
-    }
-
-    const timesArray = [
-        finalInitiatedShort,
-        step >= 2 ? finalDepartedShort : "Pending Sorting",
-        step >= 3 ? finalOnTransitShort : "Pending Dispatch",
-        step >= 4 ? finalDeliveredShort : "Pending Delivery"
-    ];
-
-    // 4. Construct sequential timeline logs according to chosen custom dates
-    const timeline = [];
-
-    // Step 1: Initiated Log
-    timeline.push({
-        time: initiatedDate || fallbackInitiated,
-        event: m1 || "Manifest Initiated & Picked Up",
-        loc: shipper.split(',')[1]?.trim() || "Shipper Origin Facility Warehouse",
-        icon: "fa-truck-ramp-box",
-        desc: "Package collection completed. Waybill tags generated securely."
-    });
-
-    // Step 2: Sorted or Customs Log
-    if (step >= 2) {
-        if (status === 'Customs Exception') {
-            timeline.unshift({
-                time: departedDate || fallbackDeparted,
-                event: m2 || "Customs Inspection Hold",
-                loc: "Port Customs Checkpoint Area",
-                icon: "fa-circle-exclamation",
-                desc: "Random customs check initiated. Import duty declaration under inspection. Agent broker has been notified."
-            });
+        // 3. Formulate ETA directly matching the custom delivery date
+        let etaValue = "Awaiting Processing";
+        if (status === 'Delivered') {
+            etaValue = `Delivered successfully (${finalDeliveredShort})`;
+        } else if (status === 'Customs Exception') {
+            etaValue = "Hold (Awaiting Customs)";
+        } else if (status === 'In Transit') {
+            etaValue = `Scheduled Delivery: ${finalDeliveredShort}`;
         } else {
+            etaValue = `ETA: ${finalDeliveredShort}`;
+        }
+
+        const timesArray = [
+            finalInitiatedShort,
+            step >= 2 ? finalDepartedShort : "Pending Sorting",
+            step >= 3 ? finalOnTransitShort : "Pending Dispatch",
+            step >= 4 ? finalDeliveredShort : "Pending Delivery"
+        ];
+
+        // 4. Construct sequential timeline logs according to chosen custom dates
+        const timeline = [];
+
+        // Step 1: Initiated Log
+        timeline.push({
+            time: initiatedDate || fallbackInitiated,
+            event: m1 || "Manifest Initiated & Picked Up",
+            loc: shipper.split(',')[1]?.trim() || "Shipper Origin Facility Warehouse",
+            icon: "fa-truck-ramp-box",
+            desc: "Package collection completed. Waybill tags generated securely."
+        });
+
+        // Step 2: Sorted or Customs Log
+        if (step >= 2) {
+            if (status === 'Customs Exception') {
+                timeline.unshift({
+                    time: departedDate || fallbackDeparted,
+                    event: m2 || "Customs Inspection Hold",
+                    loc: "Port Customs Checkpoint Area",
+                    icon: "fa-circle-exclamation",
+                    desc: "Random customs check initiated. Import duty declaration under inspection. Agent broker has been notified."
+                });
+            } else {
+                timeline.unshift({
+                    time: departedDate || fallbackDeparted,
+                    event: m2 || "Freight Sorted & Consolidated",
+                    loc: "Carrier Dispatch Center",
+                    icon: "fa-warehouse",
+                    desc: "Cargo consolidated on linehaul truck loading ramps."
+                });
+            }
+        }
+
+        // Step 3: Transit Log
+        if (step >= 3) {
             timeline.unshift({
-                time: departedDate || fallbackDeparted,
-                event: m2 || "Freight Sorted & Consolidated",
-                loc: "Carrier Dispatch Center",
-                icon: "fa-warehouse",
-                desc: "Cargo consolidated on linehaul truck loading ramps."
+                time: onTransitDate || fallbackOnTransit,
+                event: m3 || "Departed facility node on route transit",
+                loc: "Gateway Sorting Node",
+                icon: "fa-truck-fast",
+                desc: "Container manifest dispatched toward target delivery terminal."
             });
         }
+
+        // Step 4: Delivered Log
+        if (step >= 4) {
+            timeline.unshift({
+                time: deliveredDate || fallbackDelivered,
+                event: m4 || "Cargo Delivered & Completed",
+                loc: receiver.split(',')[0]?.trim() || "Destination Receiver Dock",
+                icon: "fa-circle-check",
+                desc: "Cargo offloaded. Checked out cleanly. Received and signed by local consignee."
+            });
+        }
+
+        newPackage = {
+            waybill: `WB-${Math.floor(Math.random() * 800000) + 100000}-${generatedID}`,
+            eta: etaValue,
+            location: status === 'Delivered' ? (receiver.split(',')[0] || receiver) : (status === 'In Transit' ? "En Route Gateway Center" : "Sorting Hub Depot"),
+            status: status,
+            badgeClass: badgeClass,
+            step: step,
+            shipper: shipper,
+            receiver: receiver,
+            service: service,
+            weight: weight || "15.0 kg",
+            dimensions: dimensions || "40x40x40 cm",
+            barcode: `||| ||| | || ${randomNumber} ||`,
+            tempSensor: temp || "18.5°C",
+            times: timesArray,
+            timeline: timeline
+        };
+
+        // 5. Save to database using .create() to fail if ID exists
+        try {
+            await db.collection('shipments').doc(generatedID).create(newPackage);
+            break; // Success, exit the retry loop
+        } catch (error) {
+            if (error.code === 6) { // ALREADY_EXISTS
+                maxRetries--;
+                if (maxRetries === 0) {
+                    return res.status(500).json({ error: 'Failed to generate unique tracking ID after multiple attempts' });
+                }
+                // Retry with new random ID
+                continue;
+            } else {
+                console.error('Error creating shipment:', error);
+                return res.status(500).json({ error: 'Failed to create shipment' });
+            }
+        }
     }
-
-    // Step 3: Transit Log
-    if (step >= 3) {
-        timeline.unshift({
-            time: onTransitDate || fallbackOnTransit,
-            event: m3 || "Departed facility node on route transit",
-            loc: "Gateway Sorting Node",
-            icon: "fa-truck-fast",
-            desc: "Container manifest dispatched toward target delivery terminal."
-        });
-    }
-
-    // Step 4: Delivered Log
-    if (step >= 4) {
-        timeline.unshift({
-            time: deliveredDate || fallbackDelivered,
-            event: m4 || "Cargo Delivered & Completed",
-            loc: receiver.split(',')[0]?.trim() || "Destination Receiver Dock",
-            icon: "fa-circle-check",
-            desc: "Cargo offloaded. Checked out cleanly. Received and signed by local consignee."
-        });
-    }
-
-    const newPackage = {
-        waybill: `WB-${Math.floor(Math.random() * 800000) + 100000}-${generatedID}`,
-        eta: etaValue,
-        location: status === 'Delivered' ? (receiver.split(',')[0] || receiver) : (status === 'In Transit' ? "En Route Gateway Center" : "Sorting Hub Depot"),
-        status: status,
-        badgeClass: badgeClass,
-        step: step,
-        shipper: shipper,
-        receiver: receiver,
-        service: service,
-        weight: weight || "15.0 kg",
-        dimensions: dimensions || "40x40x40 cm",
-        barcode: `||| ||| | || ${randomNumber} ||`,
-        tempSensor: temp || "18.5°C",
-        times: timesArray,
-        timeline: timeline
-    };
-
-    // 5. Save to database
-    const database = readDatabase();
-    database[generatedID] = newPackage;
-    saveDatabase(database);
 
     res.status(201).json({ success: true, trackingID: generatedID, shipment: newPackage });
 });
 
 // Update Status of package
-app.put('/api/shipments/:id/status', (req, res) => {
-    const cargoId = req.params.id.trim().toUpperCase();
-    const { status, location, details } = req.body;
+app.put('/api/shipments/:id/status', async (req, res) => {
+    try {
+        const cargoId = req.params.id.trim().toUpperCase();
+        const { status, location, details } = req.body;
 
-    const database = readDatabase();
-    const cargo = database[cargoId];
+        const docRef = db.collection('shipments').doc(cargoId);
+        
+        await db.runTransaction(async (transaction) => {
+            const doc = await transaction.get(docRef);
+            
+            if (!doc.exists) {
+                throw new Error('NOT_FOUND');
+            }
+            
+            const cargo = doc.data();
+            
+            // Modify payload
+            cargo.status = status;
+            cargo.location = location || cargo.location;
+            
+            let badgeClass = "bg-sky-500/10 text-sky-500 border border-sky-500/30";
+            let step = 1;
 
-    if (!cargo) {
-        return res.status(404).json({ error: "Target package not found." });
+            if (status === 'In Transit') {
+                badgeClass = "bg-amber-500/10 text-amber-500 border border-amber-500/30";
+                step = 3;
+                cargo.eta = "In Transit (Scheduled)";
+            } else if (status === 'Delivered') {
+                badgeClass = "bg-emerald-500/10 text-[#22C55E] border border-emerald-500/30";
+                step = 4;
+                cargo.eta = "Delivered successfully";
+            } else if (status === 'Customs Exception') {
+                badgeClass = "bg-rose-500/10 text-rose-500 border border-rose-500/30";
+                step = 2;
+                cargo.eta = "Hold (Awaiting Customs)";
+            } else {
+                badgeClass = "bg-sky-500/10 text-sky-500 border border-sky-500/30";
+                step = 1;
+                cargo.eta = "Processing in Depot";
+            }
+
+            cargo.badgeClass = badgeClass;
+            cargo.step = step;
+
+            // Append update event to timeline logs
+            const now = new Date();
+            const timeZone = process.env.APP_TIMEZONE || 'UTC';
+            const formattedTime = now.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric', timeZone }) + " - " + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone });
+            const formattedTimeShort = now.toLocaleDateString('en-US', { month: 'short', day: '2-digit', timeZone }) + ", " + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone });
+            
+            // Choose icon based on status
+            let eventIcon = 'fa-clock';
+            if (status === 'Delivered') eventIcon = 'fa-circle-check';
+            else if (status === 'In Transit') eventIcon = 'fa-truck-fast';
+            else if (status === 'Customs Exception') eventIcon = 'fa-circle-exclamation';
+            else if (status === 'Sorting Depot') eventIcon = 'fa-warehouse';
+
+            // Update steps chronologically if needed
+            if (step >= 1) cargo.times[0] = cargo.times[0] === "Pending Sorting" ? formattedTimeShort : cargo.times[0];
+            if (step >= 2) cargo.times[1] = cargo.times[1] === "Pending Sorting" ? formattedTimeShort : cargo.times[1];
+            if (step >= 3) cargo.times[2] = cargo.times[2] === "Pending Dispatch" ? formattedTimeShort : cargo.times[2];
+            if (step >= 4) cargo.times[3] = cargo.times[3] === "Pending Delivery" ? formattedTimeShort : cargo.times[3];
+
+            cargo.timeline.unshift({
+                time: formattedTime,
+                event: `Status updated to: ${status}`,
+                loc: cargo.location,
+                icon: eventIcon,
+                desc: details || `Package status altered to ${status} at ${cargo.location}. Operational logs updated.`
+            });
+
+            transaction.update(docRef, cargo);
+        });
+
+        // Fetch updated document to return
+        const updatedDoc = await docRef.get();
+        res.status(200).json({ success: true, shipment: updatedDoc.data() });
+    } catch (error) {
+        console.error('Error updating shipment status:', error);
+        if (error.message === 'NOT_FOUND') {
+            return res.status(404).json({ error: "Target package not found." });
+        }
+        res.status(500).json({ error: 'Failed to update shipment status' });
     }
-
-    // Modify payload
-    cargo.status = status;
-    cargo.location = location || cargo.location;
-    
-    let badgeClass = "bg-sky-500/10 text-sky-500 border border-sky-500/30";
-    let step = 1;
-
-    if (status === 'In Transit') {
-        badgeClass = "bg-amber-500/10 text-amber-500 border border-amber-500/30";
-        step = 3;
-        cargo.eta = "In Transit (Scheduled)";
-    } else if (status === 'Delivered') {
-        badgeClass = "bg-emerald-500/10 text-[#22C55E] border border-emerald-500/30";
-        step = 4;
-        cargo.eta = "Delivered successfully";
-    } else if (status === 'Customs Exception') {
-        badgeClass = "bg-rose-500/10 text-rose-500 border border-rose-500/30";
-        step = 2;
-        cargo.eta = "Hold (Awaiting Customs)";
-    } else {
-        badgeClass = "bg-sky-500/10 text-sky-500 border border-sky-500/30";
-        step = 1;
-        cargo.eta = "Processing in Depot";
-    }
-
-    cargo.badgeClass = badgeClass;
-    cargo.step = step;
-
-    // Append update event to timeline logs
-    const now = new Date();
-    const formattedTime = now.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }) + " - " + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-    const formattedTimeShort = now.toLocaleDateString('en-US', { month: 'short', day: '2-digit' }) + ", " + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-    
-    // Choose icon based on status
-    let eventIcon = 'fa-clock';
-    if (status === 'Delivered') eventIcon = 'fa-circle-check';
-    else if (status === 'In Transit') eventIcon = 'fa-truck-fast';
-    else if (status === 'Customs Exception') eventIcon = 'fa-circle-exclamation';
-    else if (status === 'Sorting Depot') eventIcon = 'fa-warehouse';
-
-    // Update steps chronologically if needed
-    if (step >= 1) cargo.times[0] = cargo.times[0] === "Pending Sorting" ? formattedTimeShort : cargo.times[0];
-    if (step >= 2) cargo.times[1] = cargo.times[1] === "Pending Sorting" ? formattedTimeShort : cargo.times[1];
-    if (step >= 3) cargo.times[2] = cargo.times[2] === "Pending Dispatch" ? formattedTimeShort : cargo.times[2];
-    if (step >= 4) cargo.times[3] = cargo.times[3] === "Pending Delivery" ? formattedTimeShort : cargo.times[3];
-
-    cargo.timeline.unshift({
-        time: formattedTime,
-        event: `Status updated to: ${status}`,
-        loc: cargo.location,
-        icon: eventIcon,
-        desc: details || `Package status altered to ${status} at ${cargo.location}. Operational logs updated.`
-    });
-
-    saveDatabase(database);
-    res.status(200).json({ success: true, shipment: cargo });
 });
 
 // Purge Shipment from database
-app.delete('/api/shipments/:id', (req, res) => {
-    const cargoId = req.params.id.trim().toUpperCase();
-    const database = readDatabase();
+app.delete('/api/shipments/:id', async (req, res) => {
+    try {
+        const cargoId = req.params.id.trim().toUpperCase();
+        const docRef = db.collection('shipments').doc(cargoId);
+        const doc = await docRef.get();
 
-    if (database[cargoId]) {
-        delete database[cargoId];
-        saveDatabase(database);
-        res.status(200).json({ success: true, message: `Waybill ${cargoId} permanently removed.` });
-    } else {
-        res.status(404).json({ error: "Package record not found." });
+        if (doc.exists) {
+            await docRef.delete();
+            res.status(200).json({ success: true, message: `Waybill ${cargoId} permanently removed.` });
+        } else {
+            res.status(404).json({ error: "Package record not found." });
+        }
+    } catch (error) {
+        console.error('Error deleting shipment:', error);
+        res.status(500).json({ error: 'Failed to delete shipment' });
     }
 });
 
@@ -506,7 +587,7 @@ app.get('/admin', (req, res) => {
                                 </select>
                             </div>
                             <div>
-                                <label class="block font-bold text-slate-500 uppercase tracking-wider mb-1">Current Status</label>
+                                <label class="block font-bold text-slate-500 uppercase tracking-wider mb-1">Current Status</label
                                 <select id="status" class="w-full bg-slate-50 border border-slate-200 rounded p-2.5 outline-none focus:border-primary">
                                     <option>Sorting Depot</option>
                                     <option>Customs Exception</option>
@@ -873,11 +954,16 @@ app.get('/admin', (req, res) => {
     `);
 });
 
-// Start Server Loop listener
-app.listen(PORT, () => {
-    console.log(`===================================================`);
-    console.log(` 📡 CARGOTRACKER LOGISTICS ACTIVE BACKEND RUNNING`);
-    console.log(`🏠 Public API Root: http://localhost:${PORT}`);
-    console.log(`💼 Private Admin Console link: http://localhost:${PORT}/admin`);
-    console.log(`===================================================`);
-});
+// Export app for Vercel
+module.exports = app;
+
+// Start Server Loop listener only when run directly
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`===================================================`);
+        console.log(` 📡 CARGOTRACKER LOGISTICS ACTIVE BACKEND RUNNING`);
+        console.log(`🏠 Public API Root: http://localhost:${PORT}`);
+        console.log(`💼 Private Admin Console link: http://localhost:${PORT}/admin`);
+        console.log(`===================================================`);
+    });
+}
